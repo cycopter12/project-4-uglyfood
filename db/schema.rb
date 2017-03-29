@@ -71,7 +71,6 @@ ActiveRecord::Schema.define(version: 20170329065939) do
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "",    null: false
-    t.integer  "outlet_id"
     t.string   "encrypted_password",     default: "",    null: false
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
@@ -88,8 +87,8 @@ ActiveRecord::Schema.define(version: 20170329065939) do
     t.integer  "postal_code"
     t.integer  "contact_number"
     t.boolean  "is_admin",               default: false
+    t.integer  "outlet_id"
     t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
-    t.index ["outlet_id"], name: "index_users_on_outlet_id", using: :btree
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   end
 
@@ -99,5 +98,4 @@ ActiveRecord::Schema.define(version: 20170329065939) do
   add_foreign_key "outlet_produces", "produces"
   add_foreign_key "outlets", "supermarkets"
   add_foreign_key "produces", "types"
-  add_foreign_key "users", "outlets"
 end

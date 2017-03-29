@@ -18,7 +18,7 @@ Produce.create([{type_id: '1', name: 'apple'}, {type_id: '2', name: 'cabbage'}, 
 
 OutletProduce.create([{outlet_id: 1, produce_id: 2, quantity: 10, date: Date.today.strftime("%Y-%m-%d")}, {outlet_id: 1, produce_id: 3, quantity: 20, date: Date.today.strftime("%Y-%m-%d")}, {outlet_id: 1, produce_id: 4, quantity: 14, date: Date.today.strftime("%Y-%m-%d")}, {outlet_id: 2, produce_id: 5, quantity: 12, date: Date.today.strftime("%Y-%m-%d")}, {outlet_id: 2, produce_id: 2, quantity: 18, date: Date.today.strftime("%Y-%m-%d")}, {outlet_id: 2, produce_id: 3, quantity: 26, date: Date.today.strftime("%Y-%m-%d")}, {outlet_id: 1, produce_id: 7, quantity: 8, date: Date.today.strftime("%Y-%m-%d")}])
 
-User.create([{email: 'dre@gmail.com', organization_name: 'GA', street_name: '66 Toh Tuck Road', postal_code: '6969696', contact_number: '96784847', password: '123456', password_confirmation: '123456'},{email: 'Andre@gmail.com', street_name: '66 Havor Rd', postal_code: '55555', contact_number: '96784847', password: '123456', password_confirmation: '99999', outlet_id: '1'}])
+User.create([{email: 'dre@gmail.com', organization_name: 'GA', street_name: '66 Toh Tuck Road', postal_code: '6969696', contact_number: '96784847', password: '123456', password_confirmation: '123456', outlet_id: 3}, {email: 'Andrethe@gmail.com', organization_name: 'GA', street_name: '66 Toh Tuck Road', postal_code: '6969696', contact_number: '96784847', password: '123456', password_confirmation: '123456', outlet_id: 3}])
 
 
 
