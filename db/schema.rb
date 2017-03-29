@@ -10,10 +10,63 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170328093922) do
+ActiveRecord::Schema.define(version: 20170329030557) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "orders", force: :cascade do |t|
+    t.integer  "outlet_produce_id"
+    t.integer  "user_id"
+    t.integer  "quantity_bought"
+    t.date     "date_bought"
+    t.integer  "cost"
+    t.datetime "created_at",        null: false
+    t.datetime "updated_at",        null: false
+    t.index ["outlet_produce_id"], name: "index_orders_on_outlet_produce_id", using: :btree
+    t.index ["user_id"], name: "index_orders_on_user_id", using: :btree
+  end
+
+  create_table "outlet_produces", force: :cascade do |t|
+    t.integer  "quantity"
+    t.date     "date"
+    t.integer  "supermarket_id"
+    t.integer  "produce_id"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+    t.index ["produce_id"], name: "index_outlet_produces_on_produce_id", using: :btree
+    t.index ["supermarket_id"], name: "index_outlet_produces_on_supermarket_id", using: :btree
+  end
+
+  create_table "outlets", force: :cascade do |t|
+    t.string   "street_address"
+    t.integer  "postal_code"
+    t.integer  "supermarket_id"
+    t.string   "branch"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+    t.index ["supermarket_id"], name: "index_outlets_on_supermarket_id", using: :btree
+  end
+
+  create_table "produces", force: :cascade do |t|
+    t.string   "name"
+    t.integer  "type_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["type_id"], name: "index_produces_on_type_id", using: :btree
+  end
+
+  create_table "supermarkets", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "types", force: :cascade do |t|
+    t.string   "category"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "",    null: false
@@ -37,4 +90,10 @@ ActiveRecord::Schema.define(version: 20170328093922) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   end
 
+  add_foreign_key "orders", "outlet_produces"
+  add_foreign_key "orders", "users"
+  add_foreign_key "outlet_produces", "produces"
+  add_foreign_key "outlet_produces", "supermarkets"
+  add_foreign_key "outlets", "supermarkets"
+  add_foreign_key "produces", "types"
 end

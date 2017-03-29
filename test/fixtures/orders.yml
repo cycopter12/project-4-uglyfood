@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  outlet_produce: one
+  user: one
+  quantity_bought: 1
+  date_bought: 2017-03-29
+  cost: 1
+
+two:
+  outlet_produce: two
+  user: two
+  quantity_bought: 1
+  date_bought: 2017-03-29
+  cost: 1
