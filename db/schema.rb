@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170329030557) do
+ActiveRecord::Schema.define(version: 20170329054406) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -45,6 +45,7 @@ ActiveRecord::Schema.define(version: 20170329030557) do
     t.string   "branch"
     t.datetime "created_at",     null: false
     t.datetime "updated_at",     null: false
+    t.string   "name"
     t.index ["supermarket_id"], name: "index_outlets_on_supermarket_id", using: :btree
   end
 
