@@ -30,12 +30,12 @@ ActiveRecord::Schema.define(version: 20170329030557) do
   create_table "outlet_produces", force: :cascade do |t|
     t.integer  "quantity"
     t.date     "date"
-    t.integer  "supermarket_id"
+    t.integer  "outlet_id"
     t.integer  "produce_id"
-    t.datetime "created_at",     null: false
-    t.datetime "updated_at",     null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["outlet_id"], name: "index_outlet_produces_on_outlet_id", using: :btree
     t.index ["produce_id"], name: "index_outlet_produces_on_produce_id", using: :btree
-    t.index ["supermarket_id"], name: "index_outlet_produces_on_supermarket_id", using: :btree
   end
 
   create_table "outlets", force: :cascade do |t|
@@ -92,8 +92,8 @@ ActiveRecord::Schema.define(version: 20170329030557) do
 
   add_foreign_key "orders", "outlet_produces"
   add_foreign_key "orders", "users"
+  add_foreign_key "outlet_produces", "outlets"
   add_foreign_key "outlet_produces", "produces"
-  add_foreign_key "outlet_produces", "supermarkets"
   add_foreign_key "outlets", "supermarkets"
   add_foreign_key "produces", "types"
 end
