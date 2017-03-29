@@ -1,13 +1,13 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
+  outlet: one
+  produce: one
   quantity: 1
   date: 2017-03-29
-  supermarket: one
-  produce: one
 
 two:
+  outlet: two
+  produce: two
   quantity: 1
   date: 2017-03-29
-  supermarket: two
-  produce: two

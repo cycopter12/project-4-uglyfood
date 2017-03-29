@@ -4,8 +4,8 @@ class CreateOrders < ActiveRecord::Migration[5.0]
       t.references :outlet_produce, foreign_key: true
       t.references :user, foreign_key: true
       t.integer :quantity_bought
-      t.date :date_bought
-      t.integer :cost
+      t.date :purchase_date
+      t.decimal :cost
 
       t.timestamps
     end

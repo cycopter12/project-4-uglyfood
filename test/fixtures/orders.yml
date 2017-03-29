@@ -4,12 +4,12 @@ one:
   outlet_produce: one
   user: one
   quantity_bought: 1
-  date_bought: 2017-03-29
-  cost: 1
+  purchase_date: 2017-03-29
+  cost: 9.99
 
 two:
   outlet_produce: two
   user: two
   quantity_bought: 1
-  date_bought: 2017-03-29
-  cost: 1
+  purchase_date: 2017-03-29
+  cost: 9.99
