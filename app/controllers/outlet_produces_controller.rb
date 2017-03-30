@@ -4,10 +4,16 @@ class OutletProducesController < ApplicationController
   def index
     @outlet_produces = OutletProduce.where(date: Date.today)
     # if updating the site the day after the collection, need to change the date to +1
+    respond_to do |format|
+        format.json { render json: @outlet_produces }
+    end
   end
 
   def show
-
+    @outlet_produce = OutletProduce.find_by(outlet_id: params[:outlet_id])
+    respond_to do |format|
+        format.json { render json: @outlet_produce }
+    end
   end
 
   def new
@@ -18,16 +24,28 @@ class OutletProducesController < ApplicationController
     else
       @outletproduce = OutletProduce.new
     end
+    respond_to do |format|
+      if @outletproduce.save
+        format.json { render json: @outletproduce }
+      else
+        format.json {render json: @outletproduce.errors, status: :unprocessable_entity}
+      end
+    end
   end
 
   def update
     if OutletProduce.exists?(outlet_id: current_user.outlet_id, produce_id: params[:produce_id], date: Date.today)
       @outletproduce = OutletProduce.where(outlet_id: current_user.outlet_id, produce_id: params[:produce_id], date: Date.today).take
       @outletproduce.quantity = params[:quantity]
-      @outletproduce.save
     else
       @outletproduce = OutletProduce.new(outlet_produce_params)
-      @outletproduce.save
+    end
+    respond_to do |format|
+      if @outletproduce.save
+        format.json { render json: @outletproduce }
+      else
+        format.json {render json: @outletproduce.errors, status: :unprocessable_entity}
+      end
     end
   end
 
@@ -35,7 +53,13 @@ class OutletProducesController < ApplicationController
     if OutletProduce.exists?(outlet_id: current_user.outlet_id, produce_id: params[:produce_id], date: Date.today)
       @outletproduce = OutletProduce.where(outlet_id: current_user.outlet_id, produce_id: params[:produce_id], date: Date.today).take
       @outletproduce.quantity -= params[:quantity]
-      @outletproduce.save
+      respond_to do |format|
+        if @outletproduce.save
+          format.json { render json: @outletproduce }
+        else
+          format.json {render json: @outletproduce.errors, status: :unprocessable_entity}
+        end
+      end
     end
   end
 
@@ -46,6 +70,6 @@ class OutletProducesController < ApplicationController
   end
 
   def outlet_produce_params
-    params.require(:property).permit(:outlet_id, :produce_id, :quantity, :date)
+    params.require(:outlet_produce).permit(:outlet_id, :produce_id, :quantity, :date)
   end
 end
