@@ -1,5 +1,6 @@
 <h1>Create Order</h1>
 
+<%  @outlet_produces.each do |group| %>
 <%= form_for(@order) do |f| %>
   <% if order.errors.any? %>
     <div id="error_explanation">
@@ -13,7 +14,6 @@
   <% end %>
 
 
-  <%  @outlet_produces.each do |group| %>
         <div class="col-md-4">
           <p>Name: <%= group.produce.name %></p>
         </div>
@@ -22,7 +22,7 @@
         </div>
         <div class="field">
           <%= f.label :QTY%>
-          <%= f.number_field :quantity_bought %>
+          <%= f.number_field :quantity_bought  %>
         </div>
         <div class="field">
           <%= f.label :User%>

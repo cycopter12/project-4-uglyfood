@@ -2,6 +2,7 @@ Rails.application.routes.draw do
 
 
   resources :orders
+  get 'update_orders' => 'orders#update', :as => 'update'
   resources :outlet_produces
 
   devise_for :users, controllers: { registrations: "users/registrations"}
