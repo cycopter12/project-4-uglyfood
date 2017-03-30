@@ -46,6 +46,6 @@ class OutletProducesController < ApplicationController
   end
 
   def outlet_produce_params
-    params.require(:property).permit(:outlet_id, :produce_id, :quantity, :date)
+    params.require(:outlet_produce).permit(:outlet_id, :produce_id, :quantity, :date)
   end
 end

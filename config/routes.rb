@@ -1,8 +1,8 @@
 Rails.application.routes.draw do
 
 
-resources :orders
-resources :outlet_produces
+  resources :orders
+  resources :outlet_produces
 
   devise_for :users, controllers: { registrations: "users/registrations"}
 

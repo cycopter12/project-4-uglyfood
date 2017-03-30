@@ -20,6 +20,7 @@ OutletProduce.create([{outlet_id: 1, produce_id: 2, quantity: 10, date: Date.tod
 
 User.create([{email: 'dre@gmail.com', organization_name: 'GA', street_name: '66 Toh Tuck Road', postal_code: '6969696', contact_number: '96784847', password: '123456', password_confirmation: '123456', outlet_id: 3}, {email: 'Andrethe@gmail.com', organization_name: 'GA', street_name: '66 Toh Tuck Road', postal_code: '6969696', contact_number: '96784847', password: '123456', password_confirmation: '123456', outlet_id: 3}])
 
+Order.create([{outlet_produce_id: 1, user_id: 1, quantity_bought: 5, purchase_date: Date.today, cost: 5.0}, {outlet_produce_id: 3, user_id: 1, quantity_bought: 5, purchase_date: Date.today, cost: 5.0}, {outlet_produce_id: 2, user_id: 1, quantity_bought: 5, purchase_date: Date.today, cost: 5.0}, {outlet_produce_id: 4, user_id: 1, quantity_bought: 5, purchase_date: Date.today, cost: 5.0}])
 
 
 # Order.create([{outlet_produce_id: 1, user_id: 1, }])
