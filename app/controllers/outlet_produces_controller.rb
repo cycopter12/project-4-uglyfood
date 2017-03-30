@@ -5,6 +5,7 @@ class OutletProducesController < ApplicationController
     @outlet_produces = OutletProduce.where(date: Date.today)
     # if updating the site the day after the collection, need to change the date to +1
     respond_to do |format|
+        format.html { render :index }
         format.json { render json: @outlet_produces }
     end
   end
