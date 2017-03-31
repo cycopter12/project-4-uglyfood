@@ -13,6 +13,7 @@ class OutletProducesController < ApplicationController
   def show
     @outlet_produce = OutletProduce.find_by(outlet_id: params[:outlet_id])
     respond_to do |format|
+        format.html { render :show }
         format.json { render json: @outlet_produce }
     end
   end
@@ -27,6 +28,7 @@ class OutletProducesController < ApplicationController
     end
     respond_to do |format|
       if @outletproduce.save
+        format.json { render :new }
         format.json { render json: @outletproduce }
       else
         format.json {render json: @outletproduce.errors, status: :unprocessable_entity}

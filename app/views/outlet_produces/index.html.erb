@@ -1,2 +1,6 @@
-<h1>OutletProduces#index</h1>
-<p>Find me in app/views/outlet_produces/index.html.erb</p>
+<h1>Ugly Food for sale today</h1>
+<% @outlet_produces.each do |outlet_produce| %>
+<p><%= outlet_produce.outlet.supermarket.name %> <%= outlet_produce.outlet.branch %></p>
+<p><%= outlet_produce.produce.name %>: <%= outlet_produce.quantity %></p>
+
+<% end %>
