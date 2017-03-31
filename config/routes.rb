@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
 
 
+  resources :contents
   resources :orders
   get 'update_orders' => 'orders#update', :as => 'update'
   resources :outlet_produces
