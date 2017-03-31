@@ -52,8 +52,9 @@ ActiveRecord::Schema.define(version: 20170329065939) do
   create_table "produces", force: :cascade do |t|
     t.string   "name"
     t.integer  "type_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.decimal  "cost_per_unit"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
     t.index ["type_id"], name: "index_produces_on_type_id", using: :btree
   end
 
