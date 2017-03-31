@@ -6,42 +6,15 @@ Supermarkets in Singapore generate an average of 2,500 tonnes of food waste on a
 
 [Ugly Foods](https://uglyfood.herokuapp.com/)
 
-## Getting Started
-
-Provide instructions here about how to get your project running on our local machine. Do we just need to clone and open a certain file or do we need to install anything first.
-
-### Prerequisites
-
-Run bundle install
-
-```
-Code example
-```
 
 ### How to Use
 
-A step by step guide on how to install and use the project, for example if this is a game, how do we play it.
-
-
-```
-Code example
-```
-
-More steps...
-
-```
-until finished
-```
+It's an online web app that requires no installation. Simply create an account, login and view all the produce available for the day!
 
 
 ## Tests
 
-Did you write automated tests? If so, how do we run them.
-
-
-```
-Code example
-```
+In the process of writing Rspec tests
 
 ## Built With
 
@@ -57,10 +30,13 @@ Did you write user stories, draw wireframes, use task tracking, produce ERDs? Di
 
 ## Authors
 
-Did you collaborate with others on this project, list them here
+* **Xavier Poh**  
+Github: [random-9](https://github.com/random-9)
+* **Quek Han Sheng**  
+Github: [hsquek](https://github.com/hsquek)
+* **Andre The**  
+Github: [cycopter12](https://github.com/cycopter12)
 
-* **John McClain** - *Responsible for keeping vests white* - [GithubUserName](https://github.com/GithubUserName)
+## Resources used
 
-## Acknowledgments
-
-* Hat tip to anyone who's code was used, for example [this was a useful starting point for creating this template](https://gist.github.com/PurpleBooth/109311bb0361f32d87a2).
+* [Rails Guides](http://guides.rubyonrails.org/)
