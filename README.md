@@ -39,4 +39,20 @@ Github: [cycopter12](https://github.com/cycopter12)
 
 ## Resources used
 
+## wireframes
+HomePage
+![alt tag](http://i.imgur.com/peLYTpe.png)
+SignUp
+![alt tag](http://i.imgur.com/kjeDca6.png)
+Signin
+![alt tag](http://i.imgur.com/gSfnyWY.png)
+Content Page
+![alt tag](http://i.imgur.com/nEKB4Ya.png)
+View Of All Outlet
+![alt tag](http://i.imgur.com/TC69FjO.png)
+Create Order
+![alt tag](http://i.imgur.com/hwSynXw.png)
+Order List
+![alt tag](http://i.imgur.com/UKdriTC.png)
+
 * [Rails Guides](http://guides.rubyonrails.org/)
