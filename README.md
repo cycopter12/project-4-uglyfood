@@ -24,22 +24,7 @@ In the process of writing Rspec tests
 * CSS
 * [Bootstrap](http://getbootstrap.com/)
 
-## Workflow
-
-Did you write user stories, draw wireframes, use task tracking, produce ERDs? Did you use source control, with regular commits? Include links to them here.
-
-## Authors
-
-* **Xavier Poh**  
-Github: [random-9](https://github.com/random-9)
-* **Quek Han Sheng**  
-Github: [hsquek](https://github.com/hsquek)
-* **Andre The**  
-Github: [cycopter12](https://github.com/cycopter12)
-
-## Resources used
-
-## wireframes
+## Wireframes
 HomePage
 ![alt tag](http://i.imgur.com/peLYTpe.png)
 SignUp
@@ -54,5 +39,16 @@ Create Order
 ![alt tag](http://i.imgur.com/hwSynXw.png)
 Order List
 ![alt tag](http://i.imgur.com/UKdriTC.png)
+
+## Authors
+
+* **Xavier Poh**  
+Github: [random-9](https://github.com/random-9)
+* **Quek Han Sheng**  
+Github: [hsquek](https://github.com/hsquek)
+* **Andre The**  
+Github: [cycopter12](https://github.com/cycopter12)
+
+## Resources used
 
 * [Rails Guides](http://guides.rubyonrails.org/)
