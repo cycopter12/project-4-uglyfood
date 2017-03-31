@@ -13,18 +13,12 @@
     </div>
   <% end %>
 
-
-        <div class="field">
-          <%= f.label :name%>
-          <%= f.text_field :name  %>
+        <div class="col-md-4">
+          <p>Name: <%= group.produce.name %></p>
         </div>
         <div class="field">
           <%= f.label :QTY%>
           <%= f.number_field :quantity  %>
-        </div>
-        <div class="field">
-          <%= f.label :cost%>
-          <%= f.number_field :cost_per_unit %>
         </div>
         <div class="field">
           <%= f.label :produce_id%>
