@@ -1,35 +1,32 @@
 <h1>Create New Produce</h1>
 
-<%  @outlet_produces.each do |group| %>
-<%= form_for(group) do |f| %>
-  <% if group.errors.any? %>
+<%= form_for(@outlet_produce) do |f| %>
+  <% if @outlet_produce.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(group.errors.count, "error") %> prohibited this produce from being saved:</h2>
+      <h2><%= pluralize(@outlet_produce.errors.count, "error") %> prohibited this produce from being saved:</h2>
       <ul>
-      <% group.errors.full_messages.each do |message| %>
+      <% @outlet_produce.errors.full_messages.each do |message| %>
         <li><%= message %></li>
-      <% end %>
+        <% end %>
       </ul>
     </div>
   <% end %>
 
-        <div class="col-md-4">
-          <p>Name: <%= group.produce.name %></p>
-        </div>
+
         <div class="field">
           <%= f.label :QTY%>
           <%= f.number_field :quantity  %>
         </div>
         <div class="field">
           <%= f.label :produce_id%>
-          <%= f.text_field :produce_id, :value => group.outlet_id %>
+          <%= f.text_field :produce_id, :value => @outlet_produce.produce_id %>
         </div>
         <div class="field">
           <%= f.label :outlet_id%>
-          <%= f.text_field :outlet_id, :value => group.produce_id %>
+          <%= f.text_field :outlet_id, :value => current_user.outlet_id %>
         </div>
         <div class="actions">
           <%= f.submit "Submit", class:"btn btn-default" %>
         </div>
-  <% end %>
+
   <% end %>
