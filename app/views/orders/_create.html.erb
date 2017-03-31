@@ -32,13 +32,12 @@
           <%= f.label :outlet_produce_id%>
           <%= f.text_field :outlet_produce_id, :value => group.id %>
         </div>
+        <div class="field">
+          <%= f.label :purchase_date%>
+          <%= f.date_field :purchase_date, :value => Date.today %>
+        </div>
         <div class="actions">
           <%= f.submit "Submit", class:"btn btn-default" %>
         </div>
   <% end %>
-
-
-
-
-
   <% end %>
