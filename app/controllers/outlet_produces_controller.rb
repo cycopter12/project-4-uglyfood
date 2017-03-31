@@ -19,20 +19,33 @@ class OutletProducesController < ApplicationController
   end
 
   def new
-    if OutletProduce.exists?(outlet_id: current_user.outlet_id, produce_id: params[:produce_id], date: Date.today)
-      @outletproduce = OutletProduce.where(outlet_id: current_user.outlet_id, produce_id: params[:produce_id], date: Date.today).take
-      # .where returns an array of elements that meets the criteria
-      # .take returns the first element of the array
-    else
-      @outletproduce = OutletProduce.new
-    end
+    @outlet_produce =OutletProduce.new
+    # @outlet_produces = OutletProduce.where(date: Date.today)
+    # if OutletProduce.exists?(outlet_id: current_user.outlet_id, produce_id: params[:produce_id], date: Date.today)
+    #   @outletproduce = OutletProduce.where(outlet_id: current_user.outlet_id, produce_id: params[:produce_id], date: Date.today).take
+    #   # .where returns an array of elements that meets the criteria
+    #   # .take returns the first element of the array
+    # else
+    #   @outletproduce = OutletProduce.new
+    # end
+    # respond_to do |format|
+    #   if @outletproduce.save
+    #     format.json { render :new }
+    #     format.json { render json: @outletproduce }
+    #   else
+    #     format.json {render json: @outletproduce.errors, status: :unprocessable_entity}
+    #   end
+    # end
+  end
+  def create
+    @outletproduce = OutletProduce.new(outlet_produce_params)
     respond_to do |format|
       if @outletproduce.save
-        format.json { render :new }
+        format.html { redirect_to @outletproduce, notice: 'Produce was successfully created.' }
         format.json { render json: @outletproduce }
       else
-        format.json {render json: @outletproduce.errors, status: :unprocessable_entity}
-      end
+        format.html { render :new }
+        format.json { render json: @outletproduce.errors, status: :unprocessable_entity }
     end
   end
 
@@ -52,18 +65,18 @@ class OutletProducesController < ApplicationController
     end
   end
 
-  def sell
-    if OutletProduce.exists?(outlet_id: current_user.outlet_id, produce_id: params[:produce_id], date: Date.today)
-      @outletproduce = OutletProduce.where(outlet_id: current_user.outlet_id, produce_id: params[:produce_id], date: Date.today).take
-      @outletproduce.quantity -= params[:quantity]
-      respond_to do |format|
-        if @outletproduce.save
-          format.json { render json: @outletproduce }
-        else
-          format.json {render json: @outletproduce.errors, status: :unprocessable_entity}
-        end
-      end
-    end
+  # def sell
+  #   if OutletProduce.exists?(outlet_id: current_user.outlet_id, produce_id: params[:produce_id], date: Date.today)
+  #     @outletproduce = OutletProduce.where(outlet_id: current_user.outlet_id, produce_id: params[:produce_id], date: Date.today).take
+  #     @outletproduce.quantity -= params[:quantity]
+  #     respond_to do |format|
+  #       if @outletproduce.save
+  #         format.json { render json: @outletproduce }
+  #       else
+  #         format.json {render json: @outletproduce.errors, status: :unprocessable_entity}
+  #       end
+  #     end
+  #   end
   end
 
   private

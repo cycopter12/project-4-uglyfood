@@ -1,0 +1,32 @@
+<h1>Create New Produce</h1>
+
+<%= form_for(@outlet_produce) do |f| %>
+  <% if @outlet_produce.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@outlet_produce.errors.count, "error") %> prohibited this produce from being saved:</h2>
+      <ul>
+      <% @outlet_produce.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+
+        <div class="field">
+          <%= f.label :QTY%>
+          <%= f.number_field :quantity  %>
+        </div>
+        <div class="field">
+          <%= f.label :produce_id%>
+          <%= f.text_field :produce_id, :value => @outlet_produce.produce_id %>
+        </div>
+        <div class="field">
+          <%= f.label :outlet_id%>
+          <%= f.text_field :outlet_id, :value => current_user.outlet_id %>
+        </div>
+        <div class="actions">
+          <%= f.submit "Submit", class:"btn btn-default" %>
+        </div>
+
+  <% end %>
