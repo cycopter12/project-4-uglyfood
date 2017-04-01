@@ -92,6 +92,6 @@ class OrdersController < ApplicationController
   end
 
   def order_params
-    params.require(:order).permit(:outlet_produce_id, :user_id, :quantity_bought, :purchase_date, :cost)
+    params.require(:order).permit(:outlet_produce_id[], :user_id, :quantity_bought, :purchase_date, :cost)
   end
 end
