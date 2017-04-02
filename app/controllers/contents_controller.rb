@@ -1,5 +1,6 @@
 class ContentsController < ApplicationController
   before_action :set_content, only: [:show, :edit, :update, :destroy]
+  # skip_before_filter :verify_authenticity_token, :only => :create
 
   # GET /contents
   # GET /contents.json

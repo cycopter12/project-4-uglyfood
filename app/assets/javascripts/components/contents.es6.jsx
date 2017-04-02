@@ -1,4 +1,14 @@
 class Contents extends React.Component {
+
+  submitForm: function (e) {
+  e.target.preventDefault()
+  console.log(this.state)
+  $.post({ url: '/orders',
+    data: { order: this.state },
+    success: (response) => {
+      console.log('it worked!')
+    } })
+},
   render () {
     return (
       <div>
@@ -17,18 +27,18 @@ class Contents extends React.Component {
             <input type='text' ref='body' name='content[body]' id='content_body' />
           </div>
 
-          <div class='field'>
-            <label for='content_image'>Image</label>
-            <input type='file' ref='image' name='content[image]' id='content_image' />
+          <div className='field'>
+            <label htmlFor='content_image'>Image</label>
+            <input type='file' name='content[image]' id='content_image' />
           </div>
 
-          <div class='field'>
-            <label for='content_accepted'>Accepted</label>
+          <div className='field'>
+            <label htmlFor='content_accepted'>Accepted</label>
             <input name='content[accepted]' type='hidden' value='0' /><input type='checkbox' value='1' name='content[accepted]' id='content_accepted' />
           </div>
 
           <div className='actions'>
-            <input type='submit' name='commit' value='Create Content' data-disable-with='Create Content' />
+            <input type='submit' name='commit' value='Create Content' data-disable-with='Create Content' onClick={this.submitForm}/>
           </div>
         </form>
 
