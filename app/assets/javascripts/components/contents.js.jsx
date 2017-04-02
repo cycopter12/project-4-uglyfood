@@ -11,18 +11,7 @@ class Contents extends React.Component {
 // },
   render () {
     return (
-<<<<<<< HEAD:app/assets/javascripts/components/contents.js.jsx
 
-      <p id='notice'>
-        <h1>New Contents</h1>
-      </p>,
-        <form className='new_content' id='new_content' action='/contents' acceptCharset='UTF-8' method='post'>
-          <div>
-            <label htmlFor='content_project_type'>Project type</label>
-            <input type='text' name='content[project_type]' id='content_project_type' />
-          </div>
-        </form>,
-=======
       <div>
         <p id='notice'>
           <h1>New Contents</h1>
@@ -61,7 +50,6 @@ class Contents extends React.Component {
         </form>
 
       </div>
->>>>>>> feature/content-third:app/assets/javascripts/components/contents.es6.jsx
 
     )
   }
