@@ -1,3 +1,4 @@
 
-<%= render 'create', order: @order %>
-<%= link_to 'Back', orders_path, class:"btn btn-default" %>
+<h3><%= @outlet_produces.includes(:produce, :outlet).as_json(include: { produce: { only: [:name, :date] }, outlet: { only: [:branch, :supermarket_id], include: {supermarket: { only: [:name]}} }}).inspect %> </h3>
+
+<%= react_component 'PlaceOrders', { data: @outlet_produces.includes(:produce, :outlet).as_json(include: { produce: { only: [:name, :date] }, outlet: { only: [:branch, :supermarket_id], include: {supermarket: { only: [:name]}} }}) , current_user: current_user } %>

@@ -1,8 +1,9 @@
 class OutletProduce < ApplicationRecord
   belongs_to :outlet
   belongs_to :produce
-
+  belongs_to :supermarket
   has_many :orders
+
 
   validates :outlet_id, presence: true
   validates :produce_id, presence: true
@@ -26,7 +27,7 @@ class OutletProduce < ApplicationRecord
   #   end
   # end
 
-  
+
 
 
 
