@@ -90,39 +90,53 @@ var OrderForm = React.createClass({
   // only provide form params here
   getInitialState: function () {
     return {
-      // outlet_produce_name: this.props.data.produce.name,
-      outlet_produce_id: this.props.data.produce_id,
+      outlet_produce_name: this.props.data.produce.name,
+      outlet_produce_id: this.props.data.id,
       user_id: this.props.current_user.id,
       quantity_bought: 0,
-      // quantity: this.props.data.quantity,
-      purchase_date: createDate()
-      // supermarket: this.props.data.outlet.supermarket.name,
-      // branch: this.props.data.outlet.branch
+      quantity: this.props.data.quantity,
+      purchase_date: createDate(),
+      supermarket: this.props.data.outlet.supermarket.name,
+      branch: this.props.data.outlet.branch
     }
   },
 
   handleChange: function (e) {
     var name = e.target.name
     name = name.replace(/[[\]]/g, '').replace(/(order)/g, '')
-    // console.log(name);
-    // this.setState({ name: e.target.value })
-    // console.log(e.target.value);
+
     var stateObject = function () {
       var returnObj = {}
-      returnObj[name] = +this.target.value
+      returnObj[name] = +e.target.value
       return returnObj
-    }.bind(e)()
+    }()
     console.log(stateObject)
     this.setState(stateObject)
   },
 
   submitForm: function (e) {
+    console.log(e.cancelable);
     e.preventDefault()
-    console.log(this.state)
-    $.post({ url: '/orders',
-      data: { order: this.state },
+    orderObj = {
+      user_id: this.state.user_id,
+      quantity_bought: this.state.quantity_bought,
+      outlet_produce_id: this.state.outlet_produce_id,
+      purchase_date: this.state.purchase_date
+    }
+    console.log(orderObj)
+    $.post({ url: '/orders.json',
+      data: { order: orderObj },
       success: (response) => {
-        console.log('it worked!')
+        // console.log('it worked!', response)
+        // shows whats left of produce and resets order quantity
+        resObj = {
+          outlet_produce_id: response.outlet_produce_id,
+          quantity_bought: 0,
+          quantity: this.state.quantity - orderObj.quantity_bought,
+          user_id: response.user_id
+        }
+        // console.log(resObj);
+        this.setState(resObj)
       } })
   },
 
@@ -130,15 +144,15 @@ var OrderForm = React.createClass({
     return (
       <form className='new_order' id='new_order' action='/orders' acceptCharset='UTF-8' method='post'>
         <input name='utf8' type='hidden' value='✓' />
-        <input type='hidden' name='authenticity_token' value='TB2ZMr8mXdCwaGU89iSpaMdwgJZpiyCyqrHnTMP2Dvla/xdjltXy/buJ6IGB9c7bxBAB+wroyXJguUKTtU8wIA==' />
+
         <div className='col-md-4'>
-          <p>Name: {this.props.data.produce.name}</p>
+          <p>Name: {this.state.outlet_produce_name}</p>
         </div>
         <div className='col-md-4'>
-          <p>Supermarket outlet: {this.props.data.outlet.supermarket.name} {this.props.data.outlet.branch}</p>
+          <p>Supermarket outlet: {this.state.supermarket} {this.state.branch}</p>
         </div>
         <div className='col-md-4'>
-          <p>Quantity: {this.props.data.quantity}</p>
+          <p>Quantity: {this.state.quantity}</p>
         </div>
         <div className='field'>
           <label htmlFor='order_QTY'>Quantity</label>
@@ -146,11 +160,11 @@ var OrderForm = React.createClass({
         </div>
         <div className='field'>
           <label htmlFor='order_User'>User</label>
-          <input value={this.state.current_user} type='text' ref='user_id' name='order[user_id]' id='order_user_id' />
+          <input value={this.state.user_id} type='number' ref='user_id' name='order[user_id]' id='order_user_id' />
         </div>
         <div className='field'>
           <label htmlFor='order_outlet_produce_id'>Outlet produce</label>
-          <input value={this.state.outlet_produce_id} type='text' ref='outlet_produce_id' name='order[outlet_produce_id]' id='order_outlet_produce_id' />
+          <input value={this.state.outlet_produce_id} type='number' ref='outlet_produce_id' name='order[outlet_produce_id]' id='order_outlet_produce_id' />
         </div>
         <div className='field'>
           <label htmlFor='order_purchase_date'>Purchase date</label>

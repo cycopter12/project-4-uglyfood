@@ -1,7 +1,7 @@
 class OutletProduce < ApplicationRecord
   belongs_to :outlet
   belongs_to :produce
-  belongs_to :supermarket
+
   has_many :orders
 
 
