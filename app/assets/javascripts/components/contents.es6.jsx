@@ -5,7 +5,7 @@ class Contents extends React.Component {
         <h1>New Contents</h1>
       </p>,
         <form className='field'>
-          <label htmlfor='content_project_type'>Project type</label>
+          <label htmlFor='content_project_type'>Project type</label>
           <input type='text' name='content[project_type]' id='content_project_type' />
         </form>,
 
