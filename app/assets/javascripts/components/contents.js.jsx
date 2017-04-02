@@ -1,6 +1,7 @@
 class Contents extends React.Component {
   render () {
     return (
+
       <p id='notice'>
         <h1>New Contents</h1>
       </p>,
