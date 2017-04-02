@@ -1,14 +1,14 @@
 class Contents extends React.Component {
 
-  submitForm: function (e) {
-  e.target.preventDefault()
-  console.log(this.state)
-  $.post({ url: '/orders',
-    data: { order: this.state },
-    success: (response) => {
-      console.log('it worked!')
-    } })
-},
+//   submitForm: function (e) {
+//   e.target.preventDefault()
+//   console.log(this.state)
+//   $.post({ url: '/orders',
+//     data: { order: this.state },
+//     success: (response) => {
+//       console.log('it worked!')
+//     } })
+// },
   render () {
     return (
       <div>
@@ -16,7 +16,7 @@ class Contents extends React.Component {
           <h1>New Contents</h1>
         </p>
         <form className='new_content' id='new_content' action='/contents' acceptCharset='UTF-8' method='post'>
-
+        <input type='hidden' name='authenticity_token' value='TB2ZMr8mXdCwaGU89iSpaMdwgJZpiyCyqrHnTMP2Dvla/xdjltXy/buJ6IGB9c7bxBAB+wroyXJguUKTtU8wIA==' />
           <div className='field'>
             <label htmlFor='content_project_type'>Project type</label>
             <input type='text' ref='project_type' name='content[project_type]' id='content_project_type' />
