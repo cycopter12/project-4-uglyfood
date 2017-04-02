@@ -1,9 +1,3 @@
 <h1>All Orders</h1>
 
-<% @orders.each do |order| %>
-  <div class="row">
-      <div class="col-md-4">
-        <p>Cost: <%= order.cost %></p>
-      </div>
-  </div>
-<% end %>
+<%= react_component 'Orders', { data: @orders } %>
