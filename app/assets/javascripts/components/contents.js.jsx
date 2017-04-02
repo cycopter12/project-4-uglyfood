@@ -6,8 +6,8 @@ class Contents extends React.Component {
       </p>,
         <form className='new_content' id='new_content' action='/contents' acceptCharset='UTF-8' method='post'>
           <div>
-          <label htmlfor='content_project_type'>Project type</label>
-          <input type='text' name='content[project_type]' id='content_project_type' />
+            <label htmlFor='content_project_type'>Project type</label>
+            <input type='text' name='content[project_type]' id='content_project_type' />
           </div>
         </form>,
 
