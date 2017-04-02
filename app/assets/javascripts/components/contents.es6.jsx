@@ -16,10 +16,16 @@ class Contents extends React.Component {
           <h1>New Contents</h1>
         </p>
         <form className='new_content' id='new_content' action='/contents' acceptCharset='UTF-8' method='post'>
-        <input type='hidden' name='authenticity_token' value='TB2ZMr8mXdCwaGU89iSpaMdwgJZpiyCyqrHnTMP2Dvla/xdjltXy/buJ6IGB9c7bxBAB+wroyXJguUKTtU8wIA==' />
+          <input type='hidden' name='authenticity_token' value='TB2ZMr8mXdCwaGU89iSpaMdwgJZpiyCyqrHnTMP2Dvla/xdjltXy/buJ6IGB9c7bxBAB+wroyXJguUKTtU8wIA==' />
           <div className='field'>
-            <label htmlFor='content_project_type'>Project type</label>
-            <input type='text' ref='project_type' name='content[project_type]' id='content_project_type' />
+            <label htmlFor='content_project_type'>Project Type</label>
+            <select name='content[project_type]'ref='project_type' id='content_project_type_'><option selected='selected' value='Cooking'>Cooking</option>
+              <option value='Life Hacks'>Life Hacks</option>
+            </select>
+          </div>
+          <div className='field'>
+            <label htmlFor='content_description'>Description</label>
+            <input type='text' ref='description' name='content[description]' id='content_description' />
           </div>
 
           <div className='field'>
@@ -38,7 +44,7 @@ class Contents extends React.Component {
           </div>
 
           <div className='actions'>
-            <input type='submit' name='commit' value='Create Content' data-disable-with='Create Content' onClick={this.submitForm}/>
+            <input type='submit' name='commit' value='Create Content' data-disable-with='Create Content' onClick={this.submitForm} />
           </div>
         </form>
 
