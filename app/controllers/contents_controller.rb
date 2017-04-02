@@ -1,5 +1,7 @@
 class ContentsController < ApplicationController
   before_action :set_content, only: [:show, :edit, :update, :destroy]
+  skip_before_filter :verify_authenticity_token, :only => :create
+
 
   # GET /contents
   # GET /contents.json
@@ -69,6 +71,6 @@ class ContentsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def content_params
-      params.require(:content).permit(:project_type, :body, :image, :accepted)
+      params.require(:content).permit(:project_type, :body, :image, :accepted, :description)
     end
 end
