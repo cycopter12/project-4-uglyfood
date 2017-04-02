@@ -6,11 +6,13 @@ git_source(:github) do |repo_name|
 end
 
 gem 'react-rails'
+gem 'carrierwave'
 gem 'devise'
 gem 'pry'
 gem 'cloudinary'
 gem 'bootstrap-sass'
 gem 'bootstrap_form'
+
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.0.2'
