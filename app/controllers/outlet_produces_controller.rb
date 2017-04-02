@@ -2,7 +2,8 @@ class OutletProducesController < ApplicationController
   before_action :set_outlet_produce, only: [:show, :update, :sell]
 
   def index
-    @outlet_produces = OutletProduce.where(date: Date.today)
+    @outlet_produces = OutletProduce.where(date: Date.today).includes(:produce, :outlet).as_json(include: {produce: {only: [:name]}, outlet: {only: [:branch, :name]}})
+    # puts @outlet_produces
     # if updating the site the day after the collection, need to change the date to +1
     respond_to do |format|
         format.html { render :index }

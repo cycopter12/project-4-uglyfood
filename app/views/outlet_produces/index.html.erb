@@ -1,7 +1,3 @@
-<h1>Ugly Food for sale today</h1>
-<% @outlet_produces.each do |outlet_produce| %>
-<p><%= outlet_produce.outlet.supermarket.name %> <%= outlet_produce.outlet.branch %></p>
-<p><%= outlet_produce.produce.name %>: <%= outlet_produce.quantity %></p>
+<%= react_component 'Main' %>
 
-<% end %>
 <%= link_to 'Create New Produce', new_outlet_produce_path, :method => :get, class:'btn' %>
