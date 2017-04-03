@@ -12,6 +12,7 @@ class ContentsController < ApplicationController
   # GET /contents/1
   # GET /contents/1.json
   def show
+    puts @content.inspect
   end
 
   # GET /contents/new

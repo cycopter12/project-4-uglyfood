@@ -14,9 +14,9 @@ class Contents extends React.Component {
 
       <div>
         <p id='notice'>
-          <h1>New Contents</h1>
+          <h1>New Content</h1>
         </p>
-        <form className='new_content' id='new_content' action='/contents' acceptCharset='UTF-8' method='post'>
+        <form className='new_content' id='new_content' action='/contents' encType="multipart/form-data" method='post'>
           <input type='hidden' name='authenticity_token' value='TB2ZMr8mXdCwaGU89iSpaMdwgJZpiyCyqrHnTMP2Dvla/xdjltXy/buJ6IGB9c7bxBAB+wroyXJguUKTtU8wIA==' />
           <div className='field'>
             <label htmlFor='content_project_type'>Project Type</label>
@@ -31,7 +31,7 @@ class Contents extends React.Component {
 
           <div className='field'>
             <label htmlFor='content_body'>Body</label>
-            <input type='text' ref='body' name='content[body]' id='content_body' />
+            <textarea type='text' ref='body' name='content[body]' id='content_body' ></textarea>
           </div>
 
           <div className='field'>
