@@ -25,11 +25,18 @@ function createDate () {
 }
 
 // react components
+
+// PlaceOrders >> Orders >> Order
+// PlaceOrders >> OrderSummary
+// PlaceOrders >> OrderForm
 var Orders = React.createClass({
+  componentWillMount: function () {
+    console.log('Orders:', this.props.data)
+  },
 
   render: function () {
     return (
-      <div className='row'>
+      <div className='container'>
         {this.props.data.map((order, i) => <Order key={i} data={order} idx={i + 1} />)}
       </div>
     )
@@ -38,11 +45,16 @@ var Orders = React.createClass({
 
 var Order = React.createClass({
 
+  componentWillMount: function () {
+    console.log('Individual order:', this.props.data)
+  },
+
   render: function () {
     return (
-      <div>
+      <div className='col-md-2'>
         <h3> Order Number: {this.props.idx.toString()} </h3>
         <p> Order id: {this.props.data.id}</p>
+        <p> Produce name: {this.props.data.outlet_produce.produce.name} </p>
         <p> Sub-total: {this.props.data.cost} </p>
         <p> Quantity bought: {this.props.data.quantity_bought} </p>
         <br />
@@ -51,6 +63,7 @@ var Order = React.createClass({
   }
 })
 
+// parent
 var PlaceOrders = React.createClass({
   getInitialState: function () {
     return {
@@ -62,14 +75,22 @@ var PlaceOrders = React.createClass({
   //   this.setState({
   //     orders: this.state.orders.push(created_order)
   //   })
-  // },
+  //
+
+  componentWillMount: function () {
+    console.log('Main div:', this.props.orders)
+  },
 
   render: function () {
     return (
-      <div className='row'>
-        <p> {this.props.data_inspect} </p>
-
+      <div className='container'>
+        <h2>Orders per outlet_produce</h2>
+        <Orders data={this.props.orders} />
+        <h2>Summarised orders</h2>
+        {Object.keys(this.props.order_summary).map((name, i) => <OrderSummary data={name} value={this.props.order_summary[name]} key={i} />)}
+        <h2>Order form</h2>
         {this.props.data.map((outlet_produce, i) => <OrderForm key={i} data={outlet_produce} idx={i + 1} current_user={this.props.current_user} />)}
+
       </div>
     )
   }
@@ -132,7 +153,7 @@ var OrderForm = React.createClass({
 
   render: function () {
     return (
-      <div className="col-md-3">
+      <div className='container'>
         <form className='new_order' id='new_order' action='/orders' acceptCharset='UTF-8' method='post'>
           <input name='utf8' type='hidden' value='✓' />
 
@@ -165,6 +186,21 @@ var OrderForm = React.createClass({
             <input type='submit' name='commit' value='Submit' className='btn btn-default' data-disable-with='Submit' onClick={this.submitForm} />
           </div>
         </form>
+        <br />
+        <hr />
+      </div>
+    )
+  }
+})
+
+var OrderSummary = React.createClass({
+
+  render: function () {
+    return (
+      <div className='container'>
+        <div className='col-md-2'>
+          <p>{this.props.data} : {this.props.value}</p>
+        </div>
       </div>
     )
   }
