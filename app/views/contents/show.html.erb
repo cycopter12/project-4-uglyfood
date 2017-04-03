@@ -1,4 +1,4 @@
-<%= react_component 'ContentShow', {content: @content, description: @description, image: @content.image_url} %>
+<%= react_component 'ContentShow', {content: @content, product_type: @product_type, description: @description, body: @body, image: @content.image_url} %>
 
 <%= link_to 'Edit', edit_content_path(@content) %> |
 <%= link_to 'Back', contents_path %>

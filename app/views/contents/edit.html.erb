@@ -1,6 +1,6 @@
 <h1>Editing Content</h1>
 
-<%= render 'form', content: @content %>
+<%= react_component 'Contents', {content: @content, button_text: 'Update Content'} %>
 
 <%= link_to 'Show', @content %> |
 <%= link_to 'Back', contents_path %>

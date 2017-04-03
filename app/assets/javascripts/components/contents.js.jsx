@@ -1,4 +1,4 @@
-class Contents extends React.Component {
+class ContentShow extends React.Component {
 
 //   submitForm: function (e) {
 //   e.target.preventDefault()
@@ -9,6 +9,33 @@ class Contents extends React.Component {
 //       console.log('it worked!')
 //     } })
 // },
+  render () {
+    return (
+
+      <div>
+        <h3> Product Type:{this.props.content.product_type} </h3>
+        <p> Description: {this.props.content.description}</p>
+        <p> Body: {this.props.content.body} </p>
+        <p> Image: <img src={this.props.image}/> </p>
+
+
+      </div>
+
+    )
+  }
+}
+
+class Contents extends React.Component {
+
+  submitForm(e) {
+  e.target.preventDefault()
+  console.log(this.state)
+  $.post({ url: '/orders',
+    data: { order: this.state },
+    success: (response) => {
+      console.log('it worked!')
+    } })
+}
   render () {
     return (
 
@@ -45,7 +72,7 @@ class Contents extends React.Component {
           </div>
 
           <div className='actions'>
-            <input type='submit' name='commit' value='Create Content' data-disable-with='Create Content' onClick={this.submitForm} />
+            <input type='submit' name='commit' value={this.props.button_text} data-disable-with='Create Content' onClick={this.submitForm} />
           </div>
         </form>
 
