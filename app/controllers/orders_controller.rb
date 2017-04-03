@@ -57,7 +57,7 @@ class OrdersController < ApplicationController
       order_summary: @order_summary
     }
     respond_to do |format|
-        format.html { render :index }
+        format.html { render :new }
         format.json { render json: responseObj }
     end
   end
