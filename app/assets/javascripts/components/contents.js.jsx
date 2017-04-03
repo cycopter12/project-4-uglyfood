@@ -1,22 +1,32 @@
 class Contents extends React.Component {
-  constructor(props){
+  constructor (props) {
     super(props)
     this.submitForm = this.submitForm.bind(this)
   }
-  submitForm(e){
-    e.preventDefault();
-    var project_type = this.refs.project_type.value;
-    var body = this.refs.body.value;
-    var image = this.refs.image.value;
-    var accepted = this.refs.accepted.value;
-    var description = this.refs.description.value
+  submitForm (e) {
+    e.preventDefault()
+    $form = $(e.target)
+    var formData = $form.serialize()
 
-  $.ajax({
-    url: this.props.update ? `/contents/${this.props.content.id}`: '/contents',
-    type: this.props.update ? 'PUT' : 'POST',
-    data: { content: {project_type: project_type, body: body, image: image.url, accepted: accepted, description: description }},
-    success: (response) => {
-      console.log('it worked!', response)
+    var project_type = this.refs.project_type.value
+    var body = this.refs.body.value
+    var image = this.refs.image.value
+    var accepted = this.refs.accepted.value
+    var description = this.refs.description.value
+    var form = $('#new_content')[0];
+    var data = new FormData(form);
+
+    $.ajax({
+      url: this.props.update ? `/contents/${this.props.content.id}` : '/contents',
+      type: this.props.update ? 'PUT' : 'POST',
+      enctype: 'multipart/form-data',
+      processData: false,  // Important!
+      contentType: false,
+      cache: false,
+      // data: {content: {project_type: project_type, body: body, image: image, accepted: accepted, description: description }},
+      data: data,
+      success: (response) => {
+        console.log('it worked!', response)
       }
     })
   }
@@ -25,7 +35,7 @@ class Contents extends React.Component {
     return (
 
       <div>
-        <form className='new_content' id='new_content' action='/contents' encType="multipart/form-data" method='post' onSubmit={this.submitForm}>
+        <form className='new_content' id='new_content' action='/contents' encType='multipart/form-data' method='post' onSubmit={this.submitForm}>
           <input type='hidden' name='authenticity_token' value='TB2ZMr8mXdCwaGU89iSpaMdwgJZpiyCyqrHnTMP2Dvla/xdjltXy/buJ6IGB9c7bxBAB+wroyXJguUKTtU8wIA==' />
           <div className='field'>
             <label htmlFor='content_project_type'>Project Type</label>
@@ -40,7 +50,7 @@ class Contents extends React.Component {
 
           <div className='field'>
             <label htmlFor='content_body'>Body</label>
-            <textarea type='text' ref='body' name='content[body]' id='content_body' ></textarea>
+            <textarea type='text' ref='body' name='content[body]' id='content_body' />
           </div>
 
           <div className='field'>
