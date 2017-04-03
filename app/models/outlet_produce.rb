@@ -14,7 +14,7 @@ class OutletProduce < ApplicationRecord
       p "-------------------------"
       p 'this should fail'
       p "-------------------------"
-      errors.add(:quantity, "needs to be greater than 0")
+      errors.add('outlet_produce_quantity', "needs to be greater than 0")
     end
   end
 

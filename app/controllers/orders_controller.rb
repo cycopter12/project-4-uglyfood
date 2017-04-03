@@ -41,6 +41,7 @@ class OrdersController < ApplicationController
   end
 
   def new
+    @orders = Order.where(user_id: current_user.id, purchase_date: Date.today)
     @order = Order.new
     @outlet_produces = OutletProduce.where(date: Date.today).includes(:produce, :outlet).as_json(include: { produce: { only: [:name, :date] }, outlet: { only: [:branch, :supermarket_id], include: {supermarket: { only: [:name]}} }})
   end
@@ -61,8 +62,37 @@ class OrdersController < ApplicationController
       @order = Order.new(order_params)
     end
 
+    @outlet_produce_update = OutletProduce.find(params[:order][:outlet_produce_id].to_i)
+    @outlet_produce_update.quantity -= params[:order][:quantity_bought].to_i
 
-
+    if @outlet_produce_update.save
+      p '------------------------------------'
+      p 'OP save successful, saving order'
+      p '------------------------------------'
+      respond_to do |format|
+        if @order.save
+          p '------------------------------------'
+          p 'order is saved'
+          p '------------------------------------'
+          responseObj = { order: @order, quantity_ordered: params[:order][:quantity_bought] }
+          format.html { redirect_to @order, notice: 'Order was successfully created.' }
+          format.json { render json: responseObj }
+        else
+          responseObj = { order: 'No order created', errors: @order.errors, quantity_ordered: 0}
+          format.html { render :new }
+          format.json { render json: responseObj, status: :unprocessable_entity }
+        end
+      end
+    else
+      p '------------------------------------'
+      p 'OP save failed, thus order failed to save as well'
+      p @outlet_produce_update.errors.inspect
+      p '------------------------------------'
+      respond_to do |format|
+          format.html { render :new }
+          format.json { render json: @outlet_produce_update.errors, status: :unprocessable_entity }
+      end
+    end
     # @outlet_produce_update = OutletProduce.find(params[:order][:outlet_produce_id].to_i)
     # @outlet_produce_update.quantity -= params[:order][:quantity_bought].to_i
     #
@@ -77,31 +107,6 @@ class OrdersController < ApplicationController
     #   p '------------------------------------'
     # end
 
-    respond_to do |format|
-      if @order.save
-
-        ## this part should be in the model validation, remember to move
-        @outlet_produce_update = OutletProduce.find(params[:order][:outlet_produce_id].to_i)
-        @outlet_produce_update.quantity -= params[:order][:quantity_bought].to_i
-
-        if @outlet_produce_update.save
-          p '------------------------------------'
-          p 'save successful'
-          p '------------------------------------'
-        else
-          p '------------------------------------'
-          p 'save failed'
-          p @outlet_produce_update.errors.inspect
-          p '------------------------------------'
-        end
-
-        format.html { redirect_to @order, notice: 'Order was successfully created.' }
-        format.json { render json: @order }
-      else
-        format.html { render :new }
-        format.json { render json: @order.errors, status: :unprocessable_entity }
-      end
-    end
   end
 
   def destroy
