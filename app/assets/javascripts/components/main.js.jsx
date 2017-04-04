@@ -1,16 +1,8 @@
-// var Index = React.createClass({
-//   render: function() {
-//     return (
-//       <h1>{this.props.produceName}</h1>
-//     )
-//   }
-// });
 var Main = React.createClass({
   render() {
     return (
       <div>
-        <Header />
-        <Body />
+        <Body date={this.props.date} op={this.props.outlet_produce} outlet={this.props.outlet} supermarket={this.props.supermarket} currentUser={this.props.current_user} />
       </div>
     )
   }
