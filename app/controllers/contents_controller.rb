@@ -1,18 +1,23 @@
 class ContentsController < ApplicationController
   before_action :set_content, only: [:show, :edit, :update, :destroy]
-  skip_before_filter :verify_authenticity_token, :only => :create
+  skip_before_action :verify_authenticity_token, :only => :create
 
 
   # GET /contents
   # GET /contents.json
   def index
     @contents = Content.all
+    puts @contents.inspect
+    respond_to do |format|
+        format.html { render :index}
+        format.json { render json: @contents }
+      end
   end
 
   # GET /contents/1
   # GET /contents/1.json
   def show
-    puts @content.inspect
+  
   end
 
   # GET /contents/new
@@ -22,6 +27,7 @@ class ContentsController < ApplicationController
 
   # GET /contents/1/edit
   def edit
+
   end
 
   # POST /contents
@@ -58,7 +64,7 @@ class ContentsController < ApplicationController
   # DELETE /contents/1.json
   def destroy
     @content.destroy
-    respond_to do |format|
+     respond_to do |format|
       format.html { redirect_to contents_url, notice: 'Content was successfully destroyed.' }
       format.json { head :no_content }
     end
