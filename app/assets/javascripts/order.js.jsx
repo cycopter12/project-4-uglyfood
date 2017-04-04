@@ -81,6 +81,15 @@ var PlaceOrders = React.createClass({
   //   })
   //
 
+  showOrderQuantity: function (outletProduceId) {
+    for (var i = 0; i < this.state.orders.length; i++) {
+      if (this.state.orders[i].outlet_produce.id === outletProduceId) {
+        return this.state.orders[i].quantity_bought
+      }
+    }
+    return 0
+  },
+
   componentWillMount: function () {
     console.log('Main div:', this.props.orders)
   },
@@ -102,8 +111,7 @@ var PlaceOrders = React.createClass({
         <h2>Summarised orders</h2>
         {Object.keys(this.state.order_summary).map((name, i) => <OrderSummary data={name} value={this.state.order_summary[name]} key={i} />)}
         <h2>Order form</h2>
-        {this.props.data.map((outlet_produce, i) => <OrderForm key={i} data={outlet_produce} idx={i + 1} current_user={this.state.current_user} returnProps={this.getNewPropsFromChild} />)}
-
+        {this.state.outlet_produces.map((outlet_produce, i) => <OrderForm key={i} data={outlet_produce} idx={i + 1} current_user={this.state.current_user} returnProps={this.getNewPropsFromChild} quantity_already_bought={this.showOrderQuantity(outlet_produce.id)} />)}
       </div>
     )
   }
@@ -120,7 +128,8 @@ var OrderForm = React.createClass({
       quantity: this.props.data.quantity,
       purchase_date: createDate(),
       supermarket: this.props.data.outlet.supermarket.name,
-      branch: this.props.data.outlet.branch
+      branch: this.props.data.outlet.branch,
+      quantity_already_bought: this.props.quantity_already_bought
     }
   },
 
@@ -178,14 +187,17 @@ var OrderForm = React.createClass({
         <form className='new_order' id='new_order' action='/orders' acceptCharset='UTF-8' method='post'>
           <input name='utf8' type='hidden' value='✓' />
 
-          <div className='col-md-4'>
+          <div className='col-md-3'>
             <p>Name: {this.state.outlet_produce_name}</p>
           </div>
-          <div className='col-md-4'>
+          <div className='col-md-3'>
             <p>Supermarket outlet: {this.state.supermarket} {this.state.branch}</p>
           </div>
-          <div className='col-md-4'>
+          <div className='col-md-3'>
             <p>Quantity: {this.state.quantity}</p>
+          </div>
+          <div className='col-md-3'>
+            <p>Quantity already bought: {this.state.quantity_already_bought}</p>
           </div>
           <div className='field'>
             <label htmlFor='order_QTY'>Quantity</label>

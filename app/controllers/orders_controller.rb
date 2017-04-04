@@ -53,7 +53,7 @@ class OrdersController < ApplicationController
     end
     responseObj = {
       orders: @orders,
-      data: @outlet_produces,
+      outlet_produces: @outlet_produces,
       order_summary: @order_summary
     }
     respond_to do |format|
