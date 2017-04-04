@@ -166,7 +166,8 @@ var OrderForm = React.createClass({
           outlet_produce_id: response.order.outlet_produce_id,
           quantity_bought: 0,
           quantity: this.state.quantity - response.quantity_ordered,
-          user_id: response.order.user_id
+          user_id: response.order.user_id,
+          quantity_already_bought: parseInt(this.state.quantity_already_bought) + parseInt(response.quantity_ordered)
         }
         // console.log(resObj);
         this.setState(resObj)
