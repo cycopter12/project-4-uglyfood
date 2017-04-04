@@ -5,6 +5,7 @@ var Body = React.createClass({
 
   componentDidMount() {
     $.getJSON('/outlet_produces.json', (response) => { this.setState({ outletProduces: response }) })
+    // console.log(this.state.outletProduces);
     console.log('Component mounted');
   },
 
@@ -38,19 +39,18 @@ var Body = React.createClass({
       data: { outlet_produce: outletProduce },
       success: (OutletProduce) => {
         this.setState({ outletProduces: OutletProduce })
-
       }
     })
   },
 
-
-
   render() {
     return (
       <div>
+        <h1>Produce for sale today at {this.props.supermarket.name} {this.props.outlet.name}, {this.props.outlet.branch}</h1>
         <AllOutletProduces outletProduces={this.state.outletProduces} handleDelete={this.handleDelete} onUpdate={this.handleUpdate}/>
         <br/>
-        <NewOutletProduce handleSubmit={this.handleSubmit}/>
+        <h1>Create new produce for sale</h1>
+        <NewOutletProduce handleSubmit={this.handleSubmit} date={this.props.date} op={this.props.op}/>
       </div>
     )
   }

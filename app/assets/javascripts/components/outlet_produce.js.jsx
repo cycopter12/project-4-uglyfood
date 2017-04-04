@@ -12,14 +12,14 @@ var OutletProduce = React.createClass({
       var produceId = this.props.outletProduce.produce.id
       var outletProduce = {id: outletProduceId, outlet_id: outletId, produce_id: produceId, quantity: quantity, date: date}
       this.props.handleUpdate(outletProduce)
-      
+
       console.log('in handleEdit', quantity)
     }
     this.setState({editable: !this.state.editable})
   },
 
   render() {
-    var quantity = this.state.editable ? <input type='text' ref='quantity' defaultValue={this.props.outletProduce.quantity} /> : <p>Quantity: {this.props.outletProduce.quantity}</p>
+    var quantity = this.state.editable ? <p>Quantity: <input type='text' ref='quantity' defaultValue={this.props.outletProduce.quantity} /></p> : <p>Quantity: {this.props.outletProduce.quantity}</p>
 
     return (
       <div>
