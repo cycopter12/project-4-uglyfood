@@ -138,15 +138,32 @@ class OrdersController < ApplicationController
     @outlet_produce.save
     deleted_order = @order
     @order.destroy
-    @orders = Order.all
-    @destroy_quantity = {
-      orders_left: @orders,
-      outlet_produce: @outlet_produce,
-      deleted_order: deleted_order
+    # @orders = Order.all
+    # @destroy_quantity = {
+    #   orders_left: @orders,
+    #   outlet_produce: @outlet_produce,
+    #   deleted_order: deleted_order
+    # }
+    @orders = Order.where(user_id: current_user.id, purchase_date: Date.today).includes(:outlet_produce).as_json(include: { outlet_produce: { only: [:id], include: {produce: { only: [:name] }, outlet: { only: [:branch, :supermarket_id], include: {supermarket: { only: [:name]}} }}} }).sort_by {|k| k['outlet_produce']['produce']['name']}
+
+    @outlet_produces = OutletProduce.where(date: Date.today).includes(:produce, :outlet).as_json(include: { produce: { only: [:name] }, outlet: { only: [:branch, :supermarket_id], include: {supermarket: { only: [:name]}} }}).sort_by {|k| k['outlet_id']}
+
+    # create a hash of orders with keys => produce name and quantity => sum of quantity of particular produce
+    @order_summary = Hash.new(0)
+    @orders.each do |order|
+      key = order["outlet_produce"]["produce"]["name"]
+      @order_summary[key] += order["quantity_bought"]
+    end
+    responseObj = {
+      orders: @orders,
+      outlet_produces: @outlet_produces,
+      order_summary: @order_summary
     }
+
+
     respond_to do |format|
-        format.html { render json: @destroy_quantity }
-        format.json { render json: @destroy_quantity }
+        format.html { render json: responseObj }
+        format.json { render json: responseObj }
     end
   end
 
@@ -161,6 +178,6 @@ class OrdersController < ApplicationController
   end
 
   def order_params
-    params.require(:order).permit(:outlet_produce_id[], :user_id, :quantity_bought, :purchase_date, :cost)
+    params.require(:order).permit(:outlet_produce_id, :user_id, :quantity_bought, :purchase_date, :cost)
   end
 end

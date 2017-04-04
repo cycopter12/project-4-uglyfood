@@ -37,7 +37,7 @@ var Orders = React.createClass({
   render: function () {
     return (
       <div className='container'>
-        {this.props.data.map((order, i) => <Order key={i} data={order} idx={i + 1} />)}
+        {this.props.data.map((order, i) => <Order key={i} data={order} idx={i + 1} returnProps={this.props.getUpdateFromDelete} />)}
       </div>
     )
   }
@@ -49,6 +49,17 @@ var Order = React.createClass({
     console.log('Individual order:', this.props.data)
   },
 
+  deleteOrder: function () {
+    $.ajax({
+      url: `/orders/${this.props.data.id}.json`,
+      type: 'DELETE',
+      success: (response) => {
+        console.log(response)
+        this.props.returnProps(response)
+      }
+    })
+  },
+
   render: function () {
     return (
       <div className='col-md-2'>
@@ -57,12 +68,13 @@ var Order = React.createClass({
         <p> Produce name: {this.props.data.outlet_produce.produce.name} </p>
         <p> Sub-total: {this.props.data.cost} </p>
         <p> Quantity bought: {this.props.data.quantity_bought} </p>
-        <button>Delete</button>
+        <button onClick={this.deleteOrder}>Delete</button>
         <br />
       </div>
     )
   }
 })
+
 
 // parent
 var PlaceOrders = React.createClass({
@@ -107,7 +119,7 @@ var PlaceOrders = React.createClass({
     return (
       <div className='container'>
         <h2>Orders per outlet_produce</h2>
-        <Orders data={this.state.orders} />
+        <Orders data={this.state.orders} getUpdateFromDelete={this.getNewPropsFromChild.bind(this)} />
         <h2>Summarised orders</h2>
         {Object.keys(this.state.order_summary).map((name, i) => <OrderSummary data={name} value={this.state.order_summary[name]} key={i} />)}
         <h2>Order form</h2>
