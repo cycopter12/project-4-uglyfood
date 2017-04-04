@@ -1,6 +1,10 @@
 class OutletProduce < ApplicationRecord
   belongs_to :outlet
   belongs_to :produce
+<<<<<<< HEAD
+=======
+
+>>>>>>> feature/react-init
   has_many :orders
 
 
@@ -13,7 +17,7 @@ class OutletProduce < ApplicationRecord
       p "-------------------------"
       p 'this should fail'
       p "-------------------------"
-      errors.add(:quantity, "needs to be greater than 0")
+      errors.add('outlet_produce_quantity', "needs to be greater than 0")
     end
   end
 

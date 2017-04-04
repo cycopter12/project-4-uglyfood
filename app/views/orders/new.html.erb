@@ -1,4 +1,8 @@
 
-<h3><%= @outlet_produces.includes(:produce, :outlet).as_json(include: { produce: { only: [:name, :date] }, outlet: { only: [:branch, :supermarket_id], include: {supermarket: { only: [:name]}} }}).inspect %> </h3>
+<h3><%= @outlet_produces.sort_by {|k| k['outlet_id']}.inspect %> </h3>
 
-<%= react_component 'PlaceOrders', { data: @outlet_produces.includes(:produce, :outlet).as_json(include: { produce: { only: [:name, :date] }, outlet: { only: [:branch, :supermarket_id], include: {supermarket: { only: [:name]}} }}) , current_user: current_user } %>
+<% @orders.each do |order| %>
+<h4><%= order.inspect %></h4>
+<% end %>
+
+<%= react_component 'PlaceOrders', { data: @outlet_produces, orders: @orders, order_summary: @order_summary, current_user: current_user } %>
