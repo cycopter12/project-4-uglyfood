@@ -57,6 +57,7 @@ var Order = React.createClass({
         <p> Produce name: {this.props.data.outlet_produce.produce.name} </p>
         <p> Sub-total: {this.props.data.cost} </p>
         <p> Quantity bought: {this.props.data.quantity_bought} </p>
+        <button>Delete</button>
         <br />
       </div>
     )
