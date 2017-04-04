@@ -20,22 +20,28 @@ var ContentList = React.createClass({
   },
 
   render () {
-    var projectType = this.state.editable ? <select type='text' ref='project_type' defaultValue={this.props.content.project_type} /> : <h3>{this.props.content.project_type}</h3>
+    var projectType = this.state.editable ? <select type='text' ref='project_type' defaultValue={this.props.content.project_type}>
+    <option value="cooking">cooking</option>
+    <option value="life hacks">life hacks</option>
+    </select> : <h3>{this.props.content.project_type}</h3>
     var body = this.state.editable ? <input type='text' ref='body' defaultValue={this.props.content.body} /> : <p>{this.props.content.body}</p>
     var description = this.state.editable ? <textarea type='text' ref='description' defaultValue={this.props.content.description} /> : <p>{this.props.content.description}</p>
     var image = this.state.editable ? <input type='file' ref='image' defaultValue={this.props.content.image.url} /> : <img src={this.props.content.image.url}/>
     var id = this.props.content.id
     return (
-      <div>
+
+      <div className="container">
+        <div className="col-md-3">
         {projectType}
         {body}
         {description}
         {image}
-        
+
         <button onClick={this.props.handleDelete}>Delete</button>
         <button onClick={this.handleEdit}>{this.state.editable ? 'Submit' : 'Edit'}</button>
         <a type="button" href={"/contents/" + id}>Show</a>
       </div>
+    </div>
     )
   }
 })
