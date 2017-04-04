@@ -1,11 +1,11 @@
 var ContentIndex = React.createClass({
-  handleDelete(id){
+  handleDelete (id) {
     this.props.handleDelete(id)
   },
-  onUpdate(content){
+  onUpdate (content) {
     this.props.onUpdate(content)
   },
-  handleShow(content){
+  handleShow (content) {
     this.props.handleShow(content)
   },
   getInitialState () {
@@ -13,19 +13,19 @@ var ContentIndex = React.createClass({
   },
 
   componentDidMount () {
-    $.getJSON('/contents.json', (response) => { this.setState({ contents: response })})
-    console.log(this.state.contents);
+    $.getJSON('/contents.json', (response) => { this.setState({ contents: response }) })
+    console.log(this.state.contents)
   },
   render () {
     var contents = this.state.contents.map((content) => {
       return (
         <div key={content.id}>
           <ContentList content={content}
-              handleDelete={this.handleDelete.bind(this, content.id)}
-              handleEdit={this.onUpdate}
-              handleShow={this.handleShow.bind(this, content.id)}
+            handleDelete={this.handleDelete.bind(this, content.id)}
+            handleEdit={this.onUpdate}
+            handleShow={this.handleShow.bind(this, content.id)}
           />
-          
+
         </div>
       )
     })

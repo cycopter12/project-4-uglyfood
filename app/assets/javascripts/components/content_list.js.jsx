@@ -31,6 +31,7 @@ var ContentList = React.createClass({
         {body}
         {description}
         {image}
+        
         <button onClick={this.props.handleDelete}>Delete</button>
         <button onClick={this.handleEdit}>{this.state.editable ? 'Submit' : 'Edit'}</button>
         <a type="button" href={"/contents/" + id}>Show</a>
