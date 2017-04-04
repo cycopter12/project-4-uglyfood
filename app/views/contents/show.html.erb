@@ -1,24 +1,4 @@
-<p id="notice"><%= notice %></p>
-
-<p>
-  <strong>Project type:</strong>
-  <%= @content.project_type %>
-</p>
-
-<p>
-  <strong>Body:</strong>
-  <%= @content.body %>
-</p>
-
-<p>
-  <strong>Image:</strong>
-    <img src="<%= @content.image %>">
-</p>
-
-<p>
-  <strong>Accepted:</strong>
-  <%= @content.accepted %>
-</p>
+<%= react_component 'ContentShow', {content: @content, product_type: @product_type, description: @description, body: @body, image: @content.image_url} %>
 
 <%= link_to 'Edit', edit_content_path(@content) %> |
 <%= link_to 'Back', contents_path %>
