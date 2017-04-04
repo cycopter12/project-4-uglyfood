@@ -1,8 +1,8 @@
 var NewOutletProduce = React.createClass({
-  handleClick() {
-    var produceId = this.refs.produce_id.value;
-    var quantity = this.refs.quantity.value;
-    var outletId = this.props.op.outlet_id;
+  handleClick () {
+    var produceId = this.refs.produce_id.value
+    var quantity = this.refs.quantity.value
+    var outletId = this.props.currentUser.outlet_id
     var date = this.props.date
 
     // console.log(date);
@@ -18,11 +18,11 @@ var NewOutletProduce = React.createClass({
     // console.log('The produceId value is ' + produceId + ' and the quantity value is ' + quantity);
   },
 
-  render() {
+  render () {
     return (
       <div>
-        <input ref='produce_id' placeholder='Produce id' /><br/>
-        <input ref='quantity' placeholder='Produce quantity' /><br/>
+        <input ref='produce_id' placeholder='Produce id' /><br />
+        <input ref='quantity' placeholder='Produce quantity' /><br />
         <button onClick={this.handleClick}>Submit</button>
       </div>
     )

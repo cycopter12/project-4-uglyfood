@@ -6,6 +6,8 @@ class OutletProducesController < ApplicationController
     @outlet = Outlet.find_by(id: current_user.outlet_id)
     @supermarket = Supermarket.find_by(id: @outlet.supermarket_id.to_i)
     p '**********************************************************************'
+    p current_user.outlet_id
+    p @outlet_produce
     p @outlet
     p @outlet.branch
     p @supermarket
@@ -53,7 +55,7 @@ class OutletProducesController < ApplicationController
       # puts '*************************************'
       # puts @outletproduce.quantity
     else
-      # puts '!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!'
+      puts '!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!'
       @outletproduce = OutletProduce.new(outlet_produce_params)
     end
     respond_to do |format|

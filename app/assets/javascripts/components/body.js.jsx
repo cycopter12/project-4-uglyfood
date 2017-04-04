@@ -50,7 +50,7 @@ var Body = React.createClass({
         <AllOutletProduces outletProduces={this.state.outletProduces} handleDelete={this.handleDelete} onUpdate={this.handleUpdate}/>
         <br/>
         <h1>Create new produce for sale</h1>
-        <NewOutletProduce handleSubmit={this.handleSubmit} date={this.props.date} op={this.props.op}/>
+        <NewOutletProduce handleSubmit={this.handleSubmit} date={this.props.date} op={this.props.op} currentUser={this.props.currentUser}/>
       </div>
     )
   }
