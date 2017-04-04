@@ -150,6 +150,10 @@ class OrdersController < ApplicationController
     end
   end
 
+  def delete_items
+    #code
+  end
+
   private
 
   def set_order

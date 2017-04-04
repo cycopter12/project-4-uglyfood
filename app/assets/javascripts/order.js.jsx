@@ -67,7 +67,10 @@ var Order = React.createClass({
 var PlaceOrders = React.createClass({
   getInitialState: function () {
     return {
-      orders: this.props.data
+      outlet_produces: this.props.data,
+      orders: this.props.orders,
+      order_summary: this.props.order_summary,
+      current_user: this.props.current_user
     }
   },
 
@@ -81,15 +84,24 @@ var PlaceOrders = React.createClass({
     console.log('Main div:', this.props.orders)
   },
 
+  getNewPropsFromChild: function (responseObj) {
+    console.log('parent talking here', responseObj)
+    return this.setState({
+      outlet_produces: responseObj.outlet_produces,
+      orders: responseObj.orders,
+      order_summary: responseObj.order_summary
+    })
+  },
+
   render: function () {
     return (
       <div className='container'>
         <h2>Orders per outlet_produce</h2>
-        <Orders data={this.props.orders} />
+        <Orders data={this.state.orders} />
         <h2>Summarised orders</h2>
-        {Object.keys(this.props.order_summary).map((name, i) => <OrderSummary data={name} value={this.props.order_summary[name]} key={i} />)}
+        {Object.keys(this.state.order_summary).map((name, i) => <OrderSummary data={name} value={this.state.order_summary[name]} key={i} />)}
         <h2>Order form</h2>
-        {this.props.data.map((outlet_produce, i) => <OrderForm key={i} data={outlet_produce} idx={i + 1} current_user={this.props.current_user} />)}
+        {this.props.data.map((outlet_produce, i) => <OrderForm key={i} data={outlet_produce} idx={i + 1} current_user={this.state.current_user} returnProps={this.getNewPropsFromChild} />)}
 
       </div>
     )
@@ -134,7 +146,8 @@ var OrderForm = React.createClass({
       purchase_date: this.state.purchase_date
     }
     console.log(orderObj)
-    $.post({ url: '/orders.json',
+    $.post({
+      url: '/orders.json',
       data: { order: orderObj },
       success: (response) => {
         console.log('it worked!', response)
@@ -147,6 +160,13 @@ var OrderForm = React.createClass({
         }
         // console.log(resObj);
         this.setState(resObj)
+        $.get({
+          url: '/orders/new.json',
+          success: (response) => {
+            console.log('GET request to /orders/new succeeded', response)
+            this.props.returnProps(response)
+          }
+        })
       }
     })
   },
