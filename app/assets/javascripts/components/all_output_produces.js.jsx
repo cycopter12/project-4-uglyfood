@@ -1,20 +1,18 @@
 var AllOutletProduces = React.createClass({
-  getInitialState() {
-    return { outletProduces: [] }
+  handleDelete(id) {
+    this.props.handleDelete(id)
   },
 
-  componentDidMount() {
-    $.getJSON('/outlet_produces.json', (response) => { this.setState({ outletProduces: response }) })
-    console.log('Component mounted');
+  onUpdate(outletProduce) {
+    this.props.onUpdate(outletProduce)
   },
 
   render() {
-    var outletProduces = this.state.outletProduces.map((outletProduce) => {
+    console.log(this.props.outletProduces);
+    var outletProduces = this.props.outletProduces.map((outletProduce) => {
       return (
         <div key={outletProduce.id}>
-        <h3>{outletProduce.produce.name}</h3>
-          <p>Quantity: {outletProduce.quantity}</p>
-          <p>Supermarket: {outletProduce.outlet.name} {outletProduce.outlet.branch}</p>
+        <OutletProduce outletProduce={outletProduce} handleDelete={this.handleDelete.bind(this, outletProduce.id)} handleUpdate={this.onUpdate} />
         </div>
       )
     });

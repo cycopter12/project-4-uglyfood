@@ -1,3 +1,1 @@
-<%= react_component 'Main' %>
-
-<%= link_to 'Create New Produce', new_outlet_produce_path, :method => :get, class:'btn' %>
+<%= react_component 'Main', {date: Date.today, outlet_produce: @outlet_produce, outlet: @outlet, supermarket: @supermarket}%>
