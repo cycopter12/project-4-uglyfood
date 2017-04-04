@@ -1,10 +1,7 @@
 class OutletProduce < ApplicationRecord
   belongs_to :outlet
   belongs_to :produce
-<<<<<<< HEAD
-=======
 
->>>>>>> feature/react-init
   has_many :orders
 
 
