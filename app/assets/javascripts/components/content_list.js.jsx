@@ -27,7 +27,6 @@ var ContentList = React.createClass({
     var id = this.props.content.id
     return (
       <div>
-
         {projectType}
         {body}
         {description}
