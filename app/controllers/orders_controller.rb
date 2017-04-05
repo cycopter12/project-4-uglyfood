@@ -11,40 +11,41 @@ class OrdersController < ApplicationController
     end
   end
 
-  def show
-    respond_to do |format|
-        format.html { render :show }
-        format.json { render json: @order }
-    end
-  end
+  # def show
+  #   respond_to do |format|
+  #       format.html { render :show }
+  #       format.json { render json: @order }
+  #   end
+  # end
 
-  def edit
-    @order = Order.find(params[:id])
-    @user_orders = Order.where(user_id: current_user.id, purchase_date: Date.today)
-    @outlet_produces = OutletProduce.where(date: Date.today)
-  end
-
-  def update
-    @order = Order.where(user_id: current_user.id, purchase_date: Date.today).take
-    @order.quantity_bought = params[:quantity_bought]
-    @order.save
-    @outlet_produce = OutletProduce.find(@order.outlet_produce_id)
-    @outlet_produce.quantity -= params[:order][:quantity_bought].to_i
-    @outlet_produce.save
-    @update_quantity = {
-      order: @order,
-      outlet_produce: @outlet_produce
-    }
-    respond_to do |format|
-        format.html { render :show }
-        format.json { render json: @update_quantity }
-    end
-  end
+  # def edit
+  #   @order = Order.find(params[:id])
+  #   @user_orders = Order.where(user_id: current_user.id, purchase_date: Date.today)
+  #   @outlet_produces = OutletProduce.where(date: Date.today)
+  # end
+  #
+  # def update
+  #   @order = Order.where(user_id: current_user.id, purchase_date: Date.today).take
+  #   @order.quantity_bought = params[:quantity_bought]
+  #   @order.save
+  #   @outlet_produce = OutletProduce.find(@order.outlet_produce_id)
+  #   @outlet_produce.quantity -= params[:order][:quantity_bought].to_i
+  #   @outlet_produce.save
+  #   @update_quantity = {
+  #     order: @order,
+  #     outlet_produce: @outlet_produce
+  #   }
+  #   respond_to do |format|
+  #       format.html { render :show }
+  #       format.json { render json: @update_quantity }
+  #   end
+  # end
 
   def new
     @orders = Order.where(user_id: current_user.id, purchase_date: Date.today).includes(:outlet_produce).as_json(include: { outlet_produce: { only: [:id], include: {produce: { only: [:name] }, outlet: { only: [:branch, :supermarket_id], include: {supermarket: { only: [:name]}} }}} }).sort_by {|k| k['outlet_produce']['produce']['name']}
     @order = Order.new
-    @outlet_produces = OutletProduce.where(date: Date.today).includes(:produce, :outlet).as_json(include: { produce: { only: [:name] }, outlet: { only: [:branch, :supermarket_id], include: {supermarket: { only: [:name]}} }}).sort_by {|k| k['outlet_id']}
+    # @outlet_produces = OutletProduce.where(date: Date.today).includes(:produce, :outlet).as_json(include: { produce: { only: [:name] }, outlet: { only: [:branch, :supermarket_id], include: {supermarket: { only: [:name]}} }}).sort_by {|k| k['outlet_id']}
+    @outlet_produces = OutletProduce.joins(:outlet).where(date: Date.today, :outlets => { :town => current_user.town }).includes(:produce, :outlet).as_json(include: { produce: { only: [:name] }, outlet: { only: [:branch, :supermarket_id, :town], include: {supermarket: { only: [:name]}} }}).sort_by {|k| k['outlet_id']}
     # create a hash of orders with keys => produce name and quantity => sum of quantity of particular produce
     @order_summary = Hash.new(0)
     @orders.each do |order|
