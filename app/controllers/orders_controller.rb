@@ -162,7 +162,7 @@ class OrdersController < ApplicationController
 
 
     respond_to do |format|
-        format.html { render json: responseObj }
+        format.html { redirect_to orders_path }
         format.json { render json: responseObj }
     end
   end

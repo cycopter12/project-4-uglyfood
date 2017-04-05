@@ -14,15 +14,15 @@ var OrderBody = React.createClass({
   //   })
   //
 
-  showOrderQuantity: function (outletProduceId) {
+  showOrderQuantity: function (orderArr, outletProduceId) {
     console.log('calculating order qty')
-    console.log(this.state.orders)
+    console.log(orderArr)
     for (var i = 0; i < this.state.orders.length; i++) {
       console.log('query:', outletProduceId)
-      console.log('obj OP_id:', this.state.orders[i].outlet_produce.id)
-      if (this.state.orders[i].outlet_produce.id === outletProduceId) {
-        console.log(this.state.orders[i].quantity_bought)
-        return this.state.orders[i].quantity_bought
+      console.log('obj OP_id:', orderArr[i].outlet_produce.id)
+      if (orderArr[i].outlet_produce.id === outletProduceId) {
+        console.log(orderArr[i].quantity_bought)
+        return orderArr[i].quantity_bought
       }
     }
     console.log('nothing found')
@@ -46,11 +46,11 @@ var OrderBody = React.createClass({
     return (
       <div className='container'>
         <h2>Orders per outlet_produce</h2>
-        <Orders data={this.state.orders} getUpdateFromDelete={this.getNewPropsFromChild.bind(this)} />
+        <Orders data={this.state.orders} invoice_pg={this.props.invoice_pg} />
         <h2>Summarised orders</h2>
         {Object.keys(this.state.order_summary).map((name, i) => <OrderSummary data={name} value={this.state.order_summary[name]} key={i} />)}
         <h2>Order form</h2>
-        {this.state.outlet_produces.map((outlet_produce, i) => <OrderForm key={i} data={outlet_produce} idx={i + 1} current_user={this.state.current_user} returnProps={this.getNewPropsFromChild.bind(this)} quantity_already_bought={this.showOrderQuantity(outlet_produce.id)} orders={this.state.orders} />)}
+        {this.state.outlet_produces.map((outlet_produce, i) => <OrderForm key={i} data={outlet_produce} idx={i + 1} current_user={this.state.current_user} returnProps={this.getNewPropsFromChild.bind(this)} quantity_already_bought={this.showOrderQuantity(this.state.orders, outlet_produce.id)} />)}
       </div>
     )
   }
