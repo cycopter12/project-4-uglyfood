@@ -1,0 +1,19 @@
+---
+development:
+  cloud_name: dl0ei7dfa
+  api_key: '275853865217693'
+  api_secret: hREk_5JOF8vhR72wP3uBHUJJJMk
+  enhance_image_tag: true
+  static_image_support: false
+production:
+  cloud_name: dl0ei7dfa
+  api_key: '275853865217693'
+  api_secret: hREk_5JOF8vhR72wP3uBHUJJJMk
+  enhance_image_tag: true
+  static_image_support: true
+test:
+  cloud_name: dl0ei7dfa
+  api_key: '275853865217693'
+  api_secret: hREk_5JOF8vhR72wP3uBHUJJJMk
+  enhance_image_tag: true
+  static_image_support: false

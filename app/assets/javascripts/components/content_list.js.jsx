@@ -20,8 +20,8 @@ var ContentList = React.createClass({
       <option value='cooking'>cooking</option>
       <option value='life hacks'>life hacks</option>
     </select> : <h3>{this.props.content.project_type}</h3>
-    var body = this.state.editable ? <input type='text' ref='body' defaultValue={this.props.content.body} /> : <p>{this.props.content.body}</p>
-    var description = this.state.editable ? <textarea type='text' ref='description' defaultValue={this.props.content.description} /> : <p></p>
+    var body = this.state.editable ? <textarea type='text' ref='body' defaultValue={this.props.content.body} /> : <p></p>
+    var description = this.state.editable ? <input type='text' ref='description' defaultValue={this.props.content.description} /> : <p>{this.props.content.description}</p>
     var image = this.state.editable ? <input type='file' ref='image' defaultValue={this.props.content.image.url} /> : <img src={this.props.content.image.url} />
     var accepted = this.state.editable ? <input type='checkbox' ref='accepted' defaultValue={this.props.content.accepted} /> : <p></p>
     var id = this.props.content.id
@@ -31,8 +31,8 @@ var ContentList = React.createClass({
         <div className='col-md-3'>
 
           <p>{projectType}</p>
-          <p>{body}</p>
           <p>{description}</p>
+          <p>{body}</p>
           <p>{image}</p>
           <p>{accepted}</p>
 
