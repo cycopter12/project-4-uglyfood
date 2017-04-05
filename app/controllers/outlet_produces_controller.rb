@@ -12,9 +12,9 @@ class OutletProducesController < ApplicationController
     p @outlet.branch
     p @supermarket
     if current_user.is_admin == true
-      @outlet_produces = OutletProduce.where(date: Date.today).order("created_at").includes(:produce, :outlet).as_json(include: {produce: {only: [:name]}, outlet: {only: [:branch, :name]}})
+      @outlet_produces = OutletProduce.where(date: Date.today).order("created_at").includes(:produce, :outlet).as_json(include: {produce: {only: [:name, :cost_per_unit]}, outlet: {only: [:branch, :name]}})
     else
-      @outlet_produces = OutletProduce.where(date: Date.today, outlet_id: current_user.outlet_id).order("created_at").includes(:produce, :outlet).as_json(include: {produce: {only: [:name]}, outlet: {only: [:branch, :name]}})
+      @outlet_produces = OutletProduce.where(date: Date.today, outlet_id: current_user.outlet_id).order("created_at").includes(:produce, :outlet).as_json(include: {produce: {only: [:name, :cost_per_unit]}, outlet: {only: [:branch, :name]}})
       # puts @outlet_produces
       # if updating the site the day after the collection, need to change the date to +1
     end
@@ -61,7 +61,7 @@ class OutletProducesController < ApplicationController
     respond_to do |format|
       if @outletproduce.save
         # format.html { redirect_to '/outlet_produces', notice: 'Produce was successfully created.' }
-        @outlet_produces = OutletProduce.where(date: Date.today, outlet_id: current_user.outlet_id).order("created_at").includes(:produce, :outlet).as_json(include: {produce: {only: [:name]}, outlet: {only: [:branch, :name]}})
+        @outlet_produces = OutletProduce.where(date: Date.today, outlet_id: current_user.outlet_id).order("created_at").includes(:produce, :outlet).as_json(include: {produce: {only: [:name, :cost_per_unit]}, outlet: {only: [:branch, :name]}})
         format.json { render json: @outlet_produces }
       else
         format.html { render :new }
@@ -83,7 +83,7 @@ class OutletProducesController < ApplicationController
     puts @outletproduce.quantity
     respond_to do |format|
       if @outletproduce.save
-        @outlet_produces = OutletProduce.where(date: Date.today, outlet_id: current_user.outlet_id).order("created_at").includes(:produce, :outlet).as_json(include: {produce: {only: [:name]}, outlet: {only: [:branch, :name]}})
+        @outlet_produces = OutletProduce.where(date: Date.today, outlet_id: current_user.outlet_id).order("created_at").includes(:produce, :outlet).as_json(include: {produce: {only: [:name, :cost_per_unit]}, outlet: {only: [:branch, :name]}})
         format.json { render json: @outlet_produces }
       end
     end

@@ -1,3 +1,69 @@
 // Place all the styles related to the outlet_produces controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.rowC {
+  display: flex;
+  flex-direction: row;
+}
+
+.createOP {
+  border: solid 1px #ebebeb;
+  height: 400px;
+  margin-left: auto;
+  margin-right: 0;
+  text-align: center;
+  padding: 15px;
+}
+
+.submitBtn {
+  float: right;
+  margin-top: 10px;
+}
+
+.OPheading {
+  font-size: 1.8em;
+  font-weight: bold;
+  padding-bottom: 30px;
+  border-bottom: 1px solid #ebebeb;
+}
+
+.editDeleteBtn {
+  display: inline-block;
+  float: right;
+}
+.col-md-3 {
+  margin-top: 37px;
+}
+.row {
+  padding: 0 10px;
+  border-bottom: 1px solid #ebebeb;
+  height: 100px;
+  align-items: center;
+}
+
+#addNewProduce {
+  margin-top: 15px;
+  margin-bottom: 30px;
+  font-size: 1.8em;
+  font-weight: bold;
+}
+
+input#newOP {
+  width: 50px;
+  margin: 0 auto;
+  float: right;
+}
+
+.newProduceIdQty {
+  margin-bottom: 20px;
+  text-align: left;
+}
+
+#editBtn {
+  margin-right: 10px;
+}
+
+input#qtyInput {
+  width: 50px;
+}

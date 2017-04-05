@@ -19,15 +19,24 @@ var OutletProduce = React.createClass({
   },
 
   render() {
-    var quantity = this.state.editable ? <p>Quantity: <input type='text' ref='quantity' defaultValue={this.props.outletProduce.quantity} /></p> : <p>Quantity: {this.props.outletProduce.quantity}</p>
+    var quantity = this.state.editable ? <p>Quantity: <input id="qtyInput" type='text' ref='quantity' defaultValue={this.props.outletProduce.quantity} /></p> : <p>Quantity: {this.props.outletProduce.quantity}</p>
 
     return (
-      <div>
-        <h3>{this.props.outletProduce.produce.name}</h3>
-        {quantity}
-        <p>Supermarket: {this.props.outletProduce.outlet.name} {this.props.outletProduce.outlet.branch}</p>
-        <button onClick={this.handleEdit}> {this.state.editable ? 'Submit' : 'Edit'} </button>
-        <button onClick={this.props.handleDelete}> Delete </button>
+      <div className="row">
+        <div className="col-md-3">
+        <div>{this.props.outletProduce.produce.name}</div>
+        <div>${Number(this.props.outletProduce.produce.cost_per_unit).toFixed(2)}</div>
+        </div>
+        <div className="col-md-3">
+        <div>{quantity}</div>
+        </div>
+        <div className="col-md-3">
+        ${Number(this.props.outletProduce.produce.cost_per_unit * this.props.outletProduce.quantity).toFixed(2)}
+        </div>
+        <div className="col-md-3">
+        <div className="editDeleteBtn"><button id="editBtn" onClick={this.handleEdit}> {this.state.editable ? 'Submit' : 'Edit'} </button>
+        <button onClick={this.props.handleDelete}> Delete </button></div>
+        </div>
       </div>
     )
   }
