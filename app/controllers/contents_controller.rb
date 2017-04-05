@@ -1,6 +1,6 @@
 class ContentsController < ApplicationController
   before_action :set_content, only: [:show, :edit, :update, :destroy]
-  skip_before_action :verify_authenticity_token, :only => :create
+  skip_before_action :verify_authenticity_token, :only => [:create, :update, :destroy]
 
 
   # GET /contents
@@ -79,12 +79,5 @@ class ContentsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def content_params
       params.require(:content).permit(:project_type, :body, :image, :accepted, :description)
-    end
-    def authenticate_user!
-      if current_user.email == "admin@uglyfoods.com"
-        return
-      else
-        redirect_to root_path, :notice => 'You are not authorised to access this page'
-      end
     end
 end
