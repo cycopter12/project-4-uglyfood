@@ -21,9 +21,13 @@ var NewOutletProduce = React.createClass({
   render () {
     return (
       <div>
-        <input ref='produce_id' placeholder='Produce id' /><br />
-        <input ref='quantity' placeholder='Produce quantity' /><br />
-        <button onClick={this.handleClick}>Submit</button>
+        <div className="newProduceIdQty">
+          Produce ID: <input id="newOP" ref='produce_id' />
+        </div>
+        <div className="newProduceIdQty">
+          Produce quantity: <input id='newOP' ref='quantity' />
+        </div>
+        <div className='submitBtn'><button onClick={this.handleClick}>Submit</button></div>
       </div>
     )
   }
