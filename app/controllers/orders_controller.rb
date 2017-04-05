@@ -3,8 +3,17 @@ class OrdersController < ApplicationController
   before_action :set_order, only: [:destroy, :show]
 
   def index
-    # @orders = Order.where(user_id: current_user.id, purchase_date: Date.today)
-    @orders = Order.where(user_id: current_user.id, purchase_date: Date.today).includes(:outlet_produce).as_json(include: { outlet_produce: { only: [:id], include: {produce: { only: [:name] }, outlet: { only: [:branch, :supermarket_id], include: {supermarket: { only: [:name]}} }}} })
+    set_orders()
+    set_outlet_produces()
+    create_order_summary()
+    create_branch_items()
+
+    responseObj = {
+      orders: @orders,
+      outlet_produces: @produce_list_by_outlet,
+      order_summary: @order_summary
+    }
+
     respond_to do |format|
         format.html { render :index }
         format.json { render json: @orders }
@@ -42,21 +51,18 @@ class OrdersController < ApplicationController
   # end
 
   def new
-    @orders = Order.where(user_id: current_user.id, purchase_date: Date.today).includes(:outlet_produce).as_json(include: { outlet_produce: { only: [:id], include: {produce: { only: [:name] }, outlet: { only: [:branch, :supermarket_id], include: {supermarket: { only: [:name]}} }}} }).sort_by {|k| k['outlet_produce']['produce']['name']}
     @order = Order.new
-    # @outlet_produces = OutletProduce.where(date: Date.today).includes(:produce, :outlet).as_json(include: { produce: { only: [:name] }, outlet: { only: [:branch, :supermarket_id], include: {supermarket: { only: [:name]}} }}).sort_by {|k| k['outlet_id']}
-    @outlet_produces = OutletProduce.joins(:outlet).where(date: Date.today, :outlets => { :town => current_user.town }).includes(:produce, :outlet).as_json(include: { produce: { only: [:name] }, outlet: { only: [:branch, :supermarket_id, :town], include: {supermarket: { only: [:name]}} }}).sort_by {|k| k['outlet_id']}
-    # create a hash of orders with keys => produce name and quantity => sum of quantity of particular produce
-    @order_summary = Hash.new(0)
-    @orders.each do |order|
-      key = order["outlet_produce"]["produce"]["name"]
-      @order_summary[key] += order["quantity_bought"]
-    end
+    set_orders()
+    set_outlet_produces()
+    create_order_summary()
+    create_branch_items()
+
     responseObj = {
       orders: @orders,
-      outlet_produces: @outlet_produces,
+      outlet_produces: @produce_list_by_outlet,
       order_summary: @order_summary
     }
+
     respond_to do |format|
         format.html { render :new }
         format.json { render json: responseObj }
@@ -64,7 +70,6 @@ class OrdersController < ApplicationController
   end
 
   def create
-    # @outlet_produces = OutletProduce.where(date: Date.today).includes(:produce, :outlet).as_json(include: { produce: { only: [:name, :date] }, outlet: { only: [:branch, :supermarket_id], include: {supermarket: { only: [:name]}} }})
 
     if Order.exists?(outlet_produce_id: params[:order][:outlet_produce_id].to_i, user_id: current_user.id)
       p '------------------------------------'
@@ -110,57 +115,27 @@ class OrdersController < ApplicationController
           format.json { render json: @outlet_produce_update.errors, status: :unprocessable_entity }
       end
     end
-    # @outlet_produce_update = OutletProduce.find(params[:order][:outlet_produce_id].to_i)
-    # @outlet_produce_update.quantity -= params[:order][:quantity_bought].to_i
-    #
-    # if @outlet_produce_update.save
-    #   p '------------------------------------'
-    #   p 'save successful'
-    #   p '------------------------------------'
-    # else
-    #   p '------------------------------------'
-    #   p 'save failed'
-    #   p @outlet_produce_update.errors.inspect
-    #   p '------------------------------------'
-    # end
 
   end
 
   def destroy
 
-    # find all orders contributing to the overall order quantity, delete those orders
-
     @outlet_produce = OutletProduce.find(@order.outlet_produce_id)
-    puts '********** BEFORE UPDATE **********************'
-    puts @outlet_produce.quantity
     @outlet_produce.quantity += @order.quantity_bought
-    puts '********** AFTER UPDATE **********************'
-    puts @outlet_produce.quantity
     @outlet_produce.save
     deleted_order = @order
     @order.destroy
-    # @orders = Order.all
-    # @destroy_quantity = {
-    #   orders_left: @orders,
-    #   outlet_produce: @outlet_produce,
-    #   deleted_order: deleted_order
-    # }
-    @orders = Order.where(user_id: current_user.id, purchase_date: Date.today).includes(:outlet_produce).as_json(include: { outlet_produce: { only: [:id], include: {produce: { only: [:name] }, outlet: { only: [:branch, :supermarket_id], include: {supermarket: { only: [:name]}} }}} }).sort_by {|k| k['outlet_produce']['produce']['name']}
 
-    @outlet_produces = OutletProduce.where(date: Date.today).includes(:produce, :outlet).as_json(include: { produce: { only: [:name] }, outlet: { only: [:branch, :supermarket_id], include: {supermarket: { only: [:name]}} }}).sort_by {|k| k['outlet_id']}
+    set_orders()
+    set_outlet_produces()
+    create_branch_items()
+    create_order_summary()
 
-    # create a hash of orders with keys => produce name and quantity => sum of quantity of particular produce
-    @order_summary = Hash.new(0)
-    @orders.each do |order|
-      key = order["outlet_produce"]["produce"]["name"]
-      @order_summary[key] += order["quantity_bought"]
-    end
     responseObj = {
       orders: @orders,
-      outlet_produces: @outlet_produces,
+      outlet_produces: @produce_list_by_outlet,
       order_summary: @order_summary
     }
-
 
     respond_to do |format|
         format.html { redirect_to orders_path }
@@ -181,4 +156,44 @@ class OrdersController < ApplicationController
   def order_params
     params.require(:order).permit(:outlet_produce_id, :user_id, :quantity_bought, :purchase_date, :cost)
   end
+
+  def set_orders
+    @orders = Order.where(user_id: current_user.id, purchase_date: Date.today).includes(:outlet_produce).as_json(include: { outlet_produce: { only: [:id], include: {produce: { only: [:name] }, outlet: { only: [:branch, :supermarket_id, :town], include: {supermarket: { only: [:name]}} }}} }).sort_by {|k| k['outlet_produce']['produce']['name']}
+  end
+
+  def set_outlet_produces
+    @outlet_produces = OutletProduce.joins(:outlet).where(date: Date.today, :outlets => { :town => current_user.town }).includes(:produce, :outlet).as_json(include: { produce: { only: [:name] }, outlet: { only: [:branch, :supermarket_id, :town], include: {supermarket: { only: [:name]}} }}).sort_by {|k| k['outlet_id']}
+  end
+
+  def create_branch_items()
+    @produce_list_by_outlet = Hash.new {|h,k| h[k]=[] }
+
+    @outlet_produces.each do |outlet_produce|
+      key = outlet_produce["outlet"]["branch"]
+      @produce_list_by_outlet[key] << outlet_produce
+    end
+
+    @produce_list_by_outlet.each do |branch, items|
+      sorted_items = items.sort_by { |k| k['produce']['name'] }
+      @produce_list_by_outlet[branch] = sorted_items
+    end
+  end
+
+  def create_order_summary
+    @order_summary = Hash.new(0)
+
+    @orders.each do |order|
+      key = order["outlet_produce"]["produce"]["name"]
+      @order_summary[key] += order["quantity_bought"]
+    end
+  end
+
+  def set_response_hash
+    responseObj = {
+      orders: @orders,
+      outlet_produces: @produce_list_by_outlet,
+      order_summary: @order_summary
+    }
+  end
+
 end

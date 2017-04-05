@@ -77,7 +77,6 @@ var OrderForm = React.createClass({
     })
   },
 
-  //
   // componentWillReceiveProps(nextProps) {
   //   this.evalOrderQty(nextProps.orders)
   // },

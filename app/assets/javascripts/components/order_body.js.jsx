@@ -44,6 +44,10 @@ var OrderBody = React.createClass({
 
 // quantity_already_bought={this.showOrderQuantity(this.state.orders, outlet_produce.id)}
 
+// {this.state.outlet_produces.map((outlet_produce, i) => <OrderForm key={i} data={outlet_produce} idx={i + 1} current_user={this.state.current_user} returnProps={this.getNewPropsFromChild.bind(this)} />)}
+
+// <OrderForm key={j} data={item} current_user={this.state.current_user} returnProps={this.getNewPropsFromChild.bind(this)} />
+
   render: function () {
     return (
       <div className='container'>
@@ -52,7 +56,12 @@ var OrderBody = React.createClass({
         <h2>Summarised orders</h2>
         {Object.keys(this.state.order_summary).map((name, i) => <OrderSummary data={name} value={this.state.order_summary[name]} key={i} />)}
         <h2>Order form</h2>
-        {this.state.outlet_produces.map((outlet_produce, i) => <OrderForm key={i} data={outlet_produce} idx={i + 1} current_user={this.state.current_user} returnProps={this.getNewPropsFromChild.bind(this)} />)}
+
+
+        {Object.keys(this.state.outlet_produces).map((branch, i) => <BranchItems key={i} data={this.state.outlet_produces[branch]} returnProps={this.getNewPropsFromChild.bind(this)} current_user={this.state.current_user} branchName={branch} />)}
+
+
+
       </div>
     )
   }
