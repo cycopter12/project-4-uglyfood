@@ -23,7 +23,6 @@ var ContentIndex = React.createClass({
           <ContentList content={content}
             handleDelete={this.handleDelete.bind(this, content.id)}
             handleEdit={this.onUpdate}
-            handleShow={this.handleShow.bind(this, content.id)}
           />
 
         </div>
