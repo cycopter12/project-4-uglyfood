@@ -6,6 +6,7 @@ class AddFieldsToUsers < ActiveRecord::Migration[5.0]
     add_column :users, :contact_number, :integer
     add_column :users, :is_admin, :boolean, :default => false
     add_column :users, :outlet_id, :integer
+    add_column :users, :town, :string
 
   end
 end

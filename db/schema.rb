@@ -42,8 +42,9 @@ ActiveRecord::Schema.define(version: 20170402123121) do
     t.integer  "produce_id"
     t.integer  "quantity"
     t.date     "date"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.decimal  "cost_per_unit"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
     t.index ["outlet_id"], name: "index_outlet_produces_on_outlet_id", using: :btree
     t.index ["produce_id"], name: "index_outlet_produces_on_produce_id", using: :btree
   end
@@ -53,6 +54,7 @@ ActiveRecord::Schema.define(version: 20170402123121) do
     t.integer  "postal_code"
     t.integer  "supermarket_id"
     t.string   "branch"
+    t.string   "town"
     t.datetime "created_at",     null: false
     t.datetime "updated_at",     null: false
     t.string   "name"
@@ -62,9 +64,8 @@ ActiveRecord::Schema.define(version: 20170402123121) do
   create_table "produces", force: :cascade do |t|
     t.string   "name"
     t.integer  "type_id"
-    t.decimal  "cost_per_unit"
-    t.datetime "created_at",    null: false
-    t.datetime "updated_at",    null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["type_id"], name: "index_produces_on_type_id", using: :btree
   end
 
@@ -99,6 +100,7 @@ ActiveRecord::Schema.define(version: 20170402123121) do
     t.integer  "contact_number"
     t.boolean  "is_admin",               default: false
     t.integer  "outlet_id"
+    t.string   "town"
     t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   end

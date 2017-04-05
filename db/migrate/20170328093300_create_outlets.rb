@@ -5,6 +5,7 @@ class CreateOutlets < ActiveRecord::Migration[5.0]
       t.integer :postal_code
       t.references :supermarket, foreign_key: true
       t.string :branch
+      t.string :town
 
       t.timestamps
     end

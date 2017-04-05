@@ -1,7 +1,7 @@
 var Order = React.createClass({
 
   componentWillMount: function () {
-    console.log('invoicePg: ', this.props.invoicePg)
+    console.log('invoicePg: ', this.props.invoice_pg)
   },
 
   deleteOrder: function () {

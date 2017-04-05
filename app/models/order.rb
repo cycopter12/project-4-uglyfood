@@ -17,7 +17,7 @@ class Order < ApplicationRecord
   end
 
   def set_sub_total
-    cost_per_item = Produce.find(OutletProduce.find(outlet_produce_id).produce_id).cost_per_unit
+    cost_per_item = OutletProduce.find(outlet_produce_id).cost_per_unit
     self.cost = quantity_bought * cost_per_item
   end
 

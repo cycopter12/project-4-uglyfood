@@ -5,6 +5,7 @@ class CreateOutletProduces < ActiveRecord::Migration[5.0]
       t.references :produce, foreign_key: true
       t.integer :quantity
       t.date :date
+      t.decimal :cost_per_unit
 
       t.timestamps
     end
