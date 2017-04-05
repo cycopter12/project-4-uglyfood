@@ -1,5 +1,6 @@
 class OutletProducesController < ApplicationController
   before_action :set_outlet_produce, only: [:show, :update, :sell]
+  skip_before_action :verify_authenticity_token, :only => [:create, :update, :destroy]
 
   def index
     @outlet_produce = OutletProduce.find_by(outlet_id: current_user.outlet_id)
@@ -118,6 +119,6 @@ class OutletProducesController < ApplicationController
   end
 
   def outlet_produce_params
-    params.require(:outlet_produce).permit(:outlet_id, :produce_id, :quantity, :date)
+    params.require(:outlet_produce).permit(:outlet_id, :produce_id, :quantity, :date, :cost_per_unit)
   end
 end

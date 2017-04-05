@@ -45,12 +45,22 @@ var Body = React.createClass({
 
   render() {
     return (
-      <div>
-        <h1>Produce for sale today at {this.props.supermarket.name} {this.props.outlet.name}, {this.props.outlet.branch}</h1>
-        <AllOutletProduces outletProduces={this.state.outletProduces} handleDelete={this.handleDelete} onUpdate={this.handleUpdate}/>
+      <div className='rowC'>
+        <div>
+          <div className="OPheading">
+            Produce for sale today at {this.props.supermarket.name} {this.props.outlet.name}, {this.props.outlet.branch}
+          </div>
+          <div>
+            <AllOutletProduces outletProduces={this.state.outletProduces} handleDelete={this.handleDelete} onUpdate={this.handleUpdate}/>
+          </div>
+        </div>
         <br/>
-        <h1>Create new produce for sale</h1>
-        <NewOutletProduce handleSubmit={this.handleSubmit} date={this.props.date} op={this.props.op} currentUser={this.props.currentUser}/>
+        <div className='createOP'>
+          <div id="addNewProduce">
+            Add new produce
+          </div>
+          <NewOutletProduce handleSubmit={this.handleSubmit} date={this.props.date} op={this.props.op} currentUser={this.props.currentUser}/>
+        </div>
       </div>
     )
   }

@@ -1,21 +1,44 @@
-<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
-  <div class="navigation">
-    <div class="container">
-      <div class="navbar-collapse collapse">
-        <div class="menu">
-          <ul class="nav nav-tabs" role="tablist">
-            <% if user_signed_in? %>
-            <li role="presentation"><%= link_to "Log Out", destroy_user_session_path, method: :delete %></li>
-            <li role="presentation"><a href="/orders">View Orders</a></li>
-            <li role="presentation"><a href="/contents">View Contents</a></li>
 
-            <% else %>
-            <li role="presentation"><a href="/users/sign_in">Login</a></li>
-            <li role="presentation"><a href="/users/sign_up">Sign Up</a></li>
-          </ul>
+
+<nav id="mainNav" class="navbar navbar-default navbar-fixed-top">
+        <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span> Menu <i class="fa fa-bars"></i>
+                </button>
+                <a class="navbar-brand page-scroll" href="/">UGLY FOODS</a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    <% if user_signed_in? %>
+                    <li class="page-scroll" >
+
+                       <%= link_to "Log Out", destroy_user_session_path, method: :delete %>
+
+                    </li>
+                    <li class="page-scroll" >
+                        <a href="/orders">View Orders</a>
+                    </li>
+                    <li class="page-scroll" >
+                        <a href="/contents"> View Contents</a>
+                    </li>
+                    <% else %>
+                    <li class="page-scroll" >
+                        <a href="/contents"> View Contents</a>
+                    </li>
+                    <li class="page-scroll" >
+                        <a href="/users/sign_in">Login</a>
+                    </li>
+                    <li class="page-scroll" >
+                        <a href="/users/sign_up">Sign Up</a>
+                    </li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
         </div>
-      </div>
-    </div>
-  </div>
-  <% end %>
-</nav>
+        <% end %>
+        <!-- /.container-fluid -->
+    </nav>
