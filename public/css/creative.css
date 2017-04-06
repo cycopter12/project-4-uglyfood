@@ -23,10 +23,14 @@ a {
   -webkit-transition: all 0.35s;
   -moz-transition: all 0.35s;
   transition: all 0.35s;
-  color: #F05F40;
+  color: #33995C;
+}
+a:visited {
+  color: white;
 }
 a:hover,
 a:focus {
+  background-color: white;
   color: #eb3812;
 }
 h1,
@@ -43,7 +47,7 @@ p {
   margin-bottom: 20px;
 }
 .bg-primary {
-  background-color: #F05F40;
+  background-color: #33995C;
 }
 .bg-dark {
   background-color: #222222;
@@ -155,7 +159,7 @@ header {
   background-size: cover;
   -o-background-size: cover;
   background-position: center;
-  background-image: url('../img/header.jpg');
+  background-image: url('../img/freshproduce2.png');
   text-align: center;
   color: white;
 }
@@ -281,7 +285,7 @@ header .header-content .header-content-inner p {
   margin: 0 auto 20px;
 }
 .text-primary {
-  color: #F05F40;
+  color: #33995C;
 }
 .no-gutter > [class*='col-'] {
   padding-right: 0;
@@ -337,8 +341,8 @@ fieldset[disabled] .btn-default.active {
 }
 .btn-primary {
   color: white;
-  background-color: #F05F40;
-  border-color: #F05F40;
+  background-color: #33995C;
+  border-color: #277446;
   -webkit-transition: all 0.35s;
   -moz-transition: all 0.35s;
   transition: all 0.35s;
@@ -350,7 +354,7 @@ fieldset[disabled] .btn-default.active {
 .btn-primary.active,
 .open > .dropdown-toggle.btn-primary {
   color: white;
-  background-color: #ee4b28;
+  background-color: #277446;
   border-color: #ed431f;
 }
 .btn-primary:active,

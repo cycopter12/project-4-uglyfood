@@ -2,31 +2,11 @@ var OrderForm = React.createClass({
   // only provide form params here
   getInitialState: function () {
     return {
-      // outlet_produce_name: this.props.data.produce.name,
-      // outlet_produce_id: this.props.data.id,
-      // user_id: this.props.current_user.id,
       quantity_bought: 0,
       quantity: this.props.data.quantity,
-      // purchase_date: createDate(),
-      // supermarket: this.props.data.outlet.supermarket.name,
-      // branch: this.props.data.outlet.branch,
-      quantity_already_bought: this.props.quantity_already_bought
+      quantity_already_bought: this.props.showOrderQuantity(this.props.orders, this.props.data.id)
     }
   },
-
-  // evalOrderQty: function (orderArr) {
-  //   // outlet produce id keeps changing, probably as a result of re-arrangement of the outlet produce array
-  //   console.log('calculating order qty')
-  //   for (var i = 0; i < orderArr.length; i++) {
-  //     if (parseInt(orderArr[i].outlet_produce.id) === parseInt(this.props.data.id)) {
-  //       console.log('match!')
-  //       this.setState({
-  //         quantity_already_bought: orderArr[i].quantity_bought
-  //       })
-  //       return
-  //     }
-  //   }
-  // },
 
   handleChange: function (e) {
     var name = e.target.name
@@ -86,29 +66,34 @@ var OrderForm = React.createClass({
   //   <p>Quantity already bought: {this.state.quantity_already_bought}</p>
   // </div>
 
+  // <div className='col-md-3'>
+  //   <p>Supermarket outlet: {this.props.data.outlet.supermarket.name} {this.props.data.outlet.branch}</p>
+  // </div>
+
   render: function () {
     return (
-      <div className='container'>
+      <div className='col-md-9'>
         <form className='new_order' id='new_order' action='/orders' acceptCharset='UTF-8' method='post'>
           <input name='utf8' type='hidden' value='✓' />
 
           <div className='col-md-3'>
             <p>Name: {this.props.data.produce.name}</p>
           </div>
+
           <div className='col-md-3'>
-            <p>Supermarket outlet: {this.props.data.outlet.supermarket.name} {this.props.data.outlet.branch}</p>
+            <p>Remaining: {this.state.quantity}</p>
           </div>
           <div className='col-md-3'>
-            <p>Quantity: {this.state.quantity}</p>
+            <p>Quantity already bought: {this.state.quantity_already_bought} </p>
           </div>
 
           <div className='field col-md-3'>
             <label htmlFor='order_QTY'>Quantity</label>
-            <input type='number' ref='quantity_bought' name='order[quantity_bought]' id='order_quantity_bought' value={this.state.quantity_bought} onChange={this.handleChange} />
+            <input type='number' ref='quantity_bought' name='order[quantity_bought]' id='order_quantity_bought' min="0" value={this.state.quantity_bought} onChange={this.handleChange} />
           </div>
 
           <div className='actions'>
-            <input type='submit' name='commit' value='Submit' className='btn btn-default' data-disable-with='Submit' onClick={this.submitForm} />
+            <input type='submit' name='commit' value='Submit' className='btn btn-default' data-disable-with='Submit' onClick={this.submitForm} style={{visibility:'hidden'}} />
           </div>
         </form>
         <br />
