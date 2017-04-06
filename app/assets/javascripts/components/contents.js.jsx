@@ -59,7 +59,8 @@ class Contents extends React.Component {
           </div>
 
           <div className='actions'>
-            <input type='submit' name='commit' value={this.props.button_text} data-disable-with='Create Content' />
+            <input className="btn-1" type='submit' name='commit' value={this.props.button_text} data-disable-with='Create Content' />
+            <a href="/contents"><button className="btn-1">Back</button></a>
           </div>
         </form>
       </div>
