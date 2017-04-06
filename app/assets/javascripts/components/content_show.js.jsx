@@ -26,7 +26,7 @@ var ContentShow = React.createClass({
   getInitialState () {
     return {
       contents: [],
-      is_admin: this.props.current_user.is_admin || false
+      is_admin: this.props.current_user.is_admin
     }
   },
   getInitialState () {
@@ -76,8 +76,8 @@ var ContentShow = React.createClass({
           <h2>{image}</h2>
 
 
-          <button style={{visibility: this.state.is_admin ? 'visible':'hidden'}}className='btn-1' onClick={this.handleDelete}> Delete </button>
-          <button style={{visibility: this.state.is_admin ? 'visible':'hidden'}}className='btn-1' onClick={this.handleEdit}>{this.state.editable ? 'Submit' : 'Edit'}</button>
+          <button style={{visibility: !this.state.is_admin ? 'visible':'hidden'}}className='btn-1' onClick={this.handleDelete}> Delete </button>
+          <button style={{visibility: !this.state.is_admin ? 'visible':'hidden'}}className='btn-1' onClick={this.handleEdit}>{this.state.editable ? 'Submit' : 'Edit'}</button>
 
 
 
