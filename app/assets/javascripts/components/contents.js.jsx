@@ -39,8 +39,9 @@ class Contents extends React.Component {
           <input type='hidden' name='authenticity_token' value='TB2ZMr8mXdCwaGU89iSpaMdwgJZpiyCyqrHnTMP2Dvla/xdjltXy/buJ6IGB9c7bxBAB+wroyXJguUKTtU8wIA==' />
           <div className='field'>
             <label htmlFor='content_project_type'>Project Type</label>
-            <select name='content[project_type]'ref='project_type' id='content_project_type_'><option selected='selected' value='Cooking'>Cooking</option>
-              <option value='Life Hacks'>Life Hackssssss</option>
+            <select name='content[project_type]'ref='project_type' id='content_project_type_'>
+            <option selected='selected' value='Recipes'>Recipes</option>
+              <option value='Life Hacks'>Life Hacks</option>
             </select>
           </div>
           <div className='field'>
@@ -60,7 +61,6 @@ class Contents extends React.Component {
 
           <div className='actions'>
             <input className="btn-1" type='submit' name='commit' value={this.props.button_text} data-disable-with='Create Content' />
-            <a href="/contents"><button className="btn-1">Back</button></a>
           </div>
         </form>
       </div>
