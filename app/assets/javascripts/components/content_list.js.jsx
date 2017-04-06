@@ -2,19 +2,6 @@ var ContentList = React.createClass({
   getInitialState () {
     return {editable: false}
   },
-  handleEdit () {
-    if (this.state.editable) {
-      var projectType = this.refs.project_type.value
-      var id = this.props.content.id
-      var body = this.refs.body.value
-      var description = this.refs.description.value
-      var image = this.refs.image.value
-      var accepted = this.refs.accepted.value
-      var content = {id: id, projectType: projectType, body: body, description: description, image: image, accepted: accepted}
-      this.props.handleEdit(content)
-    }
-    this.setState({editable: !this.state.editable})
-  },
   render () {
     var projectType = this.state.editable ? <select type='text' ref='project_type' defaultValue={this.props.content.project_type}>
       <option value='cooking'>cooking</option>
@@ -48,13 +35,10 @@ var ContentList = React.createClass({
           </div>
         </div>
         <div className="col-md-3">
-          <div className="editDeleteBtn">
-            <button onClick={this.props.handleDelete}> Delete </button>
-            <button onClick={this.handleEdit}>{this.state.editable ? 'Submit' : 'Edit'}</button>
             <a type='button' href={'/contents/' + id}>Show</a>
             </div>
         </div>
-        </div>
+
 
     )
   }

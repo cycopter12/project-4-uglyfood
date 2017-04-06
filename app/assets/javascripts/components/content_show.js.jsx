@@ -41,6 +41,10 @@ var ContentShow = React.createClass({
       $.ajax({
         url: `/contents/${content.id}`,
         type: 'PUT',
+        enctype: 'multipart/form-data',
+        processData: false,  // Important!
+        contentType: false,
+        cache: false,
         data: {content: content},
         success: (content) => {
           this.updateContents(this.props.content.id)
@@ -60,6 +64,7 @@ var ContentShow = React.createClass({
     var accepted = this.state.editable ? <input type='checkbox' ref='accepted' defaultValue={this.props.content.accepted} /> : <p />
     return (
       <div class="container">
+      <div class="log-in">
         <p>{projectType}</p>
         <p>{body}</p>
         <p>{description}</p>
@@ -68,7 +73,7 @@ var ContentShow = React.createClass({
         <button onClick={this.handleDelete}> Delete </button>
         <button onClick={this.handleEdit}>{this.state.editable ? 'Submit' : 'Edit'}</button>
       </div>
-
+      </div>
     )
   }
 })
