@@ -1,3 +1,23 @@
 
-<%= react_component 'MainContent', {contents: @contents} %>
-<%= link_to 'New Content', new_content_path %>
+
+<div class="container">
+  <h1><strong>Contents<strong></h1>
+  <div class="row">
+  <button class="btn-1"><%= link_to 'Create New Content', new_content_path %></button>
+</div>
+  <div class="row">
+    <% @contents.each do |content| %>
+    <%=link_to content do %>
+      <div class="col-lg-4 col-sm-6">
+        <div class="thumbnail contents">
+            <%= image_tag content.image.url %>
+        </div>
+        <div class="description">
+        <%= content.description %>
+      </div>
+      </div>
+        <% end %>
+        <% end %>
+
+</div>
+</div>
