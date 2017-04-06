@@ -26,7 +26,7 @@ var NewOutletProduce = React.createClass({
           ID: <input id="newOP" ref='produce_id' />
         </div>
         <div className="newProduceIdQty">
-          Quantity: <input id='newOP' ref='quantity' />
+          Quantity: <input id='newOP' ref='quantity' type='number' min='0' />
         </div>
         <div className="newProduceIdQty">
           Price/unit($): <input id='newOP' ref='cost_per_unit' />

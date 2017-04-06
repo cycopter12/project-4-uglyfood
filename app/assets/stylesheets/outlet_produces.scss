@@ -37,13 +37,6 @@
   margin-top: 37px;
 }
 
-#OProw {
-  padding: 37px 0 0 0;
-  border-bottom: 1px solid #ebebeb;
-  height: 100px;
-  align-items: center;
-}
-
 #addNewProduce {
   margin-top: 15px;
   margin-bottom: 30px;
@@ -79,4 +72,19 @@ input#qtyInput {
   font-weight: 700;
   text-transform: uppercase;
   font-size: 0.85em;
+}
+
+.row.OProw {
+  margin: 0;
+  border-bottom: 1px solid #ebebeb;
+  padding-top: 30px;
+}
+
+.col-md-3.rowItem {
+  margin: 0;
+  text-transform: capitalize;
+}
+
+.produceName {
+  margin-bottom: 5px;
 }
