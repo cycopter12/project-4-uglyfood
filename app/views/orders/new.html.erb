@@ -1,6 +1,6 @@
 
 
-<% @orders.each do |order| %>
+<!-- <% @orders.each do |order| %>
 <h4><%= order.inspect %></h4>
 <% end %>
 
@@ -9,6 +9,6 @@
 
 <h3><%= @produce_list_by_outlet.inspect %> </h3>
 
-<h3><%= @order_summary.inspect %> </h3>
+<h3><%= @order_summary.inspect %> </h3> -->
 
 <%= react_component 'OrderBody', { data: @produce_list_by_outlet, orders: @orders, order_summary: @order_summary, current_user: current_user, invoice_pg: false } %>

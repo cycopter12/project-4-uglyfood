@@ -60,20 +60,26 @@ var OrderBody = React.createClass({
 
 // <OrderForm key={j} data={item} current_user={this.state.current_user} returnProps={this.getNewPropsFromChild.bind(this)} />
 
+// <h2>Orders per outlet_produce</h2>
+// <Orders data={this.state.orders} invoice_pg={this.props.invoice_pg} />
+
   render: function () {
     return (
-      <div className='container'>
-        <h2>Orders per outlet_produce</h2>
-        <Orders data={this.state.orders} invoice_pg={this.props.invoice_pg} />
-        <div>
-          <h2>Summarised orders</h2>
-          {Object.keys(this.state.order_summary).map((name, i) => <OrderSummary data={name} count={this.state.order_summary[name]['quantity_bought']} subtotal={this.state.order_summary[name]['subtotal']} key={i} />)}
-          <p>Total: {this.getOrderTotal()} </p>
+      <div className='container' style={{marginTop: 50}}>
+        <div className="container">
+          <div className="col-md-9">
+            <h2>Order form</h2>
+            {Object.keys(this.state.outlet_produces).map((branch, i) => <BranchItems key={i} data={this.state.outlet_produces[branch]} returnProps={this.getNewPropsFromChild.bind(this)} current_user={this.state.current_user} branchName={branch} showOrderQuantity={this.showOrderQuantity} orders={this.state.orders} />)}
+          </div>
+          <div className='col-md-3'>
+            <h2>Your orders</h2>
+            <div>
+              {Object.keys(this.state.order_summary).map((name, i) => <OrderSummary data={name} count={this.state.order_summary[name]['quantity_bought']} subtotal={this.state.order_summary[name]['subtotal']} key={i} />)}
+              <p>Total: {this.getOrderTotal()} </p>
+            </div>
+          </div>
         </div>
 
-        <h2>Order form</h2>
-
-        {Object.keys(this.state.outlet_produces).map((branch, i) => <BranchItems key={i} data={this.state.outlet_produces[branch]} returnProps={this.getNewPropsFromChild.bind(this)} current_user={this.state.current_user} branchName={branch} showOrderQuantity={this.showOrderQuantity} />)}
       </div>
     )
   }

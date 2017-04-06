@@ -1,7 +1,8 @@
 class OrdersController < ApplicationController
 
   before_action :set_order, only: [:destroy, :show]
-skip_before_action :verify_authenticity_token, :only => [:create, :destroy]
+  skip_before_action :verify_authenticity_token, :only => [:create, :destroy]
+
   def index
     set_orders()
     set_outlet_produces()
@@ -155,7 +156,6 @@ skip_before_action :verify_authenticity_token, :only => [:create, :destroy]
 
   def order_params
     params.require(:order).permit(:outlet_produce_id, :user_id, :quantity_bought, :purchase_date, :cost)
-
   end
 
   def set_orders
@@ -164,14 +164,13 @@ skip_before_action :verify_authenticity_token, :only => [:create, :destroy]
 
   def set_outlet_produces
     @outlet_produces = OutletProduce.joins(:outlet).where(date: Date.today, :outlets => { :town => current_user.town }).includes(:produce, :outlet).as_json(include: { produce: { only: [:name] }, outlet: { only: [:branch, :supermarket_id, :town], include: {supermarket: { only: [:name]}} }}).sort_by {|k| k['outlet_id']}
-
   end
 
   def create_branch_items()
     @produce_list_by_outlet = Hash.new {|h,k| h[k]=[] }
 
     @outlet_produces.each do |outlet_produce|
-      key = outlet_produce["outlet"]["branch"]
+      key = outlet_produce["outlet"]["supermarket"]["name"] + ": " + outlet_produce["outlet"]["branch"].to_s
       @produce_list_by_outlet[key] << outlet_produce
     end
 
@@ -193,12 +192,26 @@ skip_before_action :verify_authenticity_token, :only => [:create, :destroy]
     p @order_summary
   end
 
-  def set_response_hash
-    responseObj = {
-      orders: @orders,
-      outlet_produces: @produce_list_by_outlet,
-      order_summary: @order_summary
-    }
+  def create_order_items()
+    @order_list_by_outlet = Hash.new {|h,k| h[k]=[] }
+
+    @outlet_produces.each do |outlet_produce|
+      key = outlet_produce["outlet"]["supermarket"]["name"] + ": " + outlet_produce["outlet"]["branch"].to_s
+      @produce_list_by_outlet[key] << outlet_produce
+    end
+
+    @produce_list_by_outlet.each do |branch, items|
+      sorted_items = items.sort_by { |k| k['produce']['name'] }
+      @produce_list_by_outlet[branch] = sorted_items
+    end
   end
+
+  # def set_response_hash
+  #   responseObj = {
+  #     orders: @orders,
+  #     outlet_produces: @produce_list_by_outlet,
+  #     order_summary: @order_summary
+  #   }
+  # end
 
 end

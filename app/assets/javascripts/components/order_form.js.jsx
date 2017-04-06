@@ -10,7 +10,7 @@ var OrderForm = React.createClass({
       // purchase_date: createDate(),
       // supermarket: this.props.data.outlet.supermarket.name,
       // branch: this.props.data.outlet.branch,
-      quantity_already_bought: this.props.quantity_already_bought
+      quantity_already_bought: this.props.showOrderQuantity(this.props.orders, this.props.data.id)
     }
   },
 
@@ -88,7 +88,7 @@ var OrderForm = React.createClass({
 
   render: function () {
     return (
-      <div className='container'>
+      <div className='col-md-9'>
         <form className='new_order' id='new_order' action='/orders' acceptCharset='UTF-8' method='post'>
           <input name='utf8' type='hidden' value='✓' />
 
@@ -100,6 +100,9 @@ var OrderForm = React.createClass({
           </div>
           <div className='col-md-3'>
             <p>Quantity: {this.state.quantity}</p>
+          </div>
+          <div className='col-md-3'>
+            <p>Quantity already bought: {this.state.quantity_already_bought} </p>
           </div>
 
           <div className='field col-md-3'>
