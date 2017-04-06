@@ -15,15 +15,18 @@
                 <ul class="nav navbar-nav navbar-right">
                     <% if user_signed_in? %>
                     <li class="page-scroll" >
-
-                       <%= link_to "Log Out", destroy_user_session_path, method: :delete %>
-
-                    </li>
-                    <li class="page-scroll" >
                         <a href="/orders">View Orders</a>
                     </li>
                     <li class="page-scroll" >
+                        <a href="/outlet_produces">Sell Produce</a>
+                    </li>
+                    <li class="page-scroll" >
                         <a href="/contents"> View Contents</a>
+                    </li>
+                    <li class="page-scroll" >
+
+                      <%= link_to "Log Out", destroy_user_session_path, method: :delete %>
+
                     </li>
                     <% else %>
                     <li class="page-scroll" >
