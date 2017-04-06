@@ -35,14 +35,14 @@ var Order = React.createClass({
         <div className='col-md-2 OPcolumn'>
             {this.props.data.outlet_produce.outlet.supermarket.name} {this.props.data.outlet_produce.outlet.branch}
         </div>
-        <div className='col-md-2 OPcolumn'>
+        <div className='col-md-2 OPcolumn' style={{textTransform: "capitalize"}}>
             {this.props.data.outlet_produce.produce.name}
         </div>
         <div className='col-md-2 OPcolumn'>
-            {this.props.data.cost}
+        {this.props.data.quantity_bought}
         </div>
         <div className='col-md-2 OPcolumn'>
-            {this.props.data.quantity_bought}
+            ${Number(this.props.data.cost).toFixed(2)}
         </div>
         <button className='btn-1' onClick={this.deleteOrder}>Delete</button>
         <br />
