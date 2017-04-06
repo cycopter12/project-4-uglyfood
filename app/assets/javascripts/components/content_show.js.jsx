@@ -26,12 +26,19 @@ var ContentShow = React.createClass({
   getInitialState () {
     return {
       contents: [],
-      is_admin: this.props.current_user.is_admin
+      is_admin: false,
+      editable: false
     }
   },
-  getInitialState () {
-    return {editable: false}
+
+  componentWillMount () {
+    if (this.props.current_user) {
+      this.setState({
+        is_admin: this.props.current_user.is_admin
+      })
+    }
   },
+
   handleEdit () {
     if (this.state.editable) {
       var projectType = this.refs.project_type.value
@@ -76,8 +83,8 @@ var ContentShow = React.createClass({
           <h2>{image}</h2>
 
 
-          <button style={{visibility: !this.state.is_admin ? 'visible':'hidden'}}className='btn-1' onClick={this.handleDelete}> Delete </button>
-          <button style={{visibility: !this.state.is_admin ? 'visible':'hidden'}}className='btn-1' onClick={this.handleEdit}>{this.state.editable ? 'Submit' : 'Edit'}</button>
+          <button style={{visibility: this.state.is_admin ? 'visible':'hidden'}}className='btn-1' onClick={this.handleDelete}> Delete </button>
+          <button style={{visibility: this.state.is_admin ? 'visible':'hidden'}}className='btn-1' onClick={this.handleEdit}>{this.state.editable ? 'Submit' : 'Edit'}</button>
 
 
 
