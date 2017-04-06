@@ -1,7 +1,7 @@
 // Place all the styles related to the contents controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
-.col-md-5 {
+.row {
   margin-top: 50px;
   padding: 0 10px;
   height: 100px;
@@ -15,8 +15,14 @@
 }
 .editDeleteBtn {
   display: inline-block;
+  text-align:left;
   float: left;
 }
-.container{
-  margin-top:570px;
+.new_content{
+  margin-left: 44%;
+	display: block;
+	text-align: left;
+}
+.container2{
+    margin-top: 70px;
 }

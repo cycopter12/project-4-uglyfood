@@ -29,32 +29,33 @@ var ContentList = React.createClass({
       <div className='container'>
         <h1>All Contents</h1>
         <div className='row'>
-          <div className='col-md-5'>
+          <div className='col-md-4'>
           Project Type
             {projectType}
           </div>
-          <div className='col-md-5'>
+          <div className='col-md-4'>
             Title
               {description}
           </div>
-          <div className='col-md-5'>
+          <div className='col-md-4'>
             {body}
           </div>
-          <div className='col-md-5'>
+          <div className='col-md-4'>
             {image}
           </div>
-          <div className='col-md-5'>
+          <div className='col-md-4'>
             {accepted}
           </div>
         </div>
-          <div className='col-md-3'>
+        <div className="col-md-3">
           <div className="editDeleteBtn">
             <button onClick={this.props.handleDelete}> Delete </button>
             <button onClick={this.handleEdit}>{this.state.editable ? 'Submit' : 'Edit'}</button>
             <a type='button' href={'/contents/' + id}>Show</a>
             </div>
         </div>
-      </div>
+        </div>
+
     )
   }
 })
