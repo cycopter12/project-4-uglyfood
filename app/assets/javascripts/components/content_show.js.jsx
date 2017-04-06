@@ -43,7 +43,7 @@ var ContentShow = React.createClass({
         type: 'PUT',
         data: {content: content},
         success: (content) => {
-          this.updateContents(content.id)
+          this.updateContents(this.props.content.id)
         }
       })
     }
@@ -59,7 +59,7 @@ var ContentShow = React.createClass({
     var image = this.state.editable ? <input type='file' ref='image' defaultValue={this.props.content.image.url} /> : <img src={this.props.content.image.url} />
     var accepted = this.state.editable ? <input type='checkbox' ref='accepted' defaultValue={this.props.content.accepted} /> : <p />
     return (
-      <div>
+      <div class="container">
         <p>{projectType}</p>
         <p>{body}</p>
         <p>{description}</p>
