@@ -32,11 +32,13 @@
   display: inline-block;
   float: right;
 }
-.col-md-3 {
+
+.OPColumn {
   margin-top: 37px;
 }
-.row {
-  padding: 0 10px;
+
+#OProw {
+  padding: 37px 0 0 0;
   border-bottom: 1px solid #ebebeb;
   height: 100px;
   align-items: center;
@@ -66,4 +68,15 @@ input#newOP {
 
 input#qtyInput {
   width: 50px;
+}
+
+.btn-1 {
+  background-color: #277446;
+  color: white;
+  border: none;
+  font-family: 'Open Sans', 'Helvetica Neue', Arial, sans-serif;
+  padding: 7px;
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: 0.85em;
 }

@@ -80,8 +80,10 @@ class OutletProducesController < ApplicationController
     @outletproduce = OutletProduce.find_by(id: params[:id])
     puts @outletproduce.quantity
     @outletproduce.quantity = params[:outlet_produce][:quantity].to_i
+    @outletproduce.cost_per_unit = params[:outlet_produce][:cost_per_unit].to_f
     puts '*****************************************************************'
     puts @outletproduce.quantity
+    puts @outletproduce.cost_per_unit
     respond_to do |format|
       if @outletproduce.save
         @outlet_produces = OutletProduce.where(date: Date.today, outlet_id: current_user.outlet_id).order("created_at").includes(:produce, :outlet).as_json(include: {produce: {only: [:name]}, outlet: {only: [:branch, :name]}})

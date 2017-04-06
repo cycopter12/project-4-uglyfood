@@ -23,15 +23,15 @@ var NewOutletProduce = React.createClass({
     return (
       <div>
         <div className="newProduceIdQty">
-          Produce ID: <input id="newOP" ref='produce_id' />
+          ID: <input id="newOP" ref='produce_id' />
         </div>
         <div className="newProduceIdQty">
-          Produce quantity: <input id='newOP' ref='quantity' />
+          Quantity: <input id='newOP' ref='quantity' />
         </div>
         <div className="newProduceIdQty">
-          Produce price/unit: <input id='newOP' ref='cost_per_unit' />
+          Price/unit($): <input id='newOP' ref='cost_per_unit' />
         </div>
-        <div className='submitBtn'><button onClick={this.handleClick}>Submit</button></div>
+        <div className='submitBtn'><button className="btn-1" onClick={this.handleClick}>Submit</button></div>
       </div>
     )
   }
