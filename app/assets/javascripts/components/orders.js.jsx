@@ -24,13 +24,6 @@ var Orders = React.createClass({
 
     return (
       <div className='container' style={{marginTop: 5 + 'em'}}>
-        <div className='container'>
-          <p style={{visibility: this.state.orders.length === 0 ? 'visible' : 'hidden' }}>
-            You have no orders!
-            <a className="btn-1" href='/orders/new'> Place an order </a>
-          </p>
-
-        </div>
         <div style={{visibility: !(this.state.orders.length === 0) ? 'visible' : 'hidden', marginTop:3+"em" }}>
         <div className='OProw' style={{color: '#33995C', fontSize: 1.4 + 'em', fontWeight: 'bold', paddingLeft: '0'}}>
           <div class='col-md-12'>
@@ -42,6 +35,13 @@ var Orders = React.createClass({
           </div>
         </div>
         {this.state.orders.map((order, i) => <Order key={i} data={order} idx={i + 1} returnProps={this.getUpdateFromDelete} />)}
+        <div className='container'>
+        <p style={{visibility: this.state.orders.length === 0 ? 'visible' : 'hidden' }}>
+        You have no orders!
+        <a className="btn-1" href='/orders/new'> Place an order </a>
+        </p>
+
+        </div>
           <a className='btn-1' href='/orders/new'> Place an order </a>
         </div>
       </div>

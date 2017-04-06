@@ -34,7 +34,7 @@ a {
   color: #33995C;
 }
 a:visited {
-  color: black;
+  color: white;
 }
 a:hover,
 a:focus {
@@ -426,4 +426,8 @@ img::-moz-selection {
 }
 body {
   webkit-tap-highlight-color: #222222;
+}
+
+.container.contentIndex{
+  width: 100%;
 }
