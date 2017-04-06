@@ -68,9 +68,8 @@ var ContentShow = React.createClass({
           <h2>Description: {body}</h2>
           <h2>{image}</h2>
 
-          <button className='btn-1' onClick={this.handleDelete}> Delete </button>
-          <button className='btn-1' onClick={this.handleEdit}>{this.state.editable ? 'Submit' : 'Edit'}</button>
-          <a href="/contents"><button className="btn-1">Back</button></a>
+          <button style={{visibility: this.props.current_user.is_admin ? 'visible':'hidden'}}className='btn-1' onClick={this.handleDelete}> Delete </button>
+          <button style={{visibility: this.props.current_user.is_admin ? 'visible':'hidden'}}className='btn-1' onClick={this.handleEdit}>{this.state.editable ? 'Submit' : 'Edit'}</button>
         </div>
       </div>
     )

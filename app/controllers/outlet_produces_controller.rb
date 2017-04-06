@@ -1,4 +1,5 @@
 class OutletProducesController < ApplicationController
+  before_action :authenticate_user!, :check_supermarket_acc
   before_action :set_outlet_produce, only: [:show, :update, :sell]
   skip_before_action :verify_authenticity_token, :only => [:create, :update, :destroy]
 
@@ -122,5 +123,12 @@ class OutletProducesController < ApplicationController
 
   def outlet_produce_params
     params.require(:outlet_produce).permit(:outlet_id, :produce_id, :quantity, :date, :cost_per_unit)
+  end
+
+  def check_supermarket_acc
+    p '****************************************'
+    p !!current_user.outlet_id
+    p '****************************************'
+    redirect_to(root_path) unless !!current_user.outlet_id
   end
 end
