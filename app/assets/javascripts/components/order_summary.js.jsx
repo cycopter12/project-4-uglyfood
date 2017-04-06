@@ -4,7 +4,7 @@ var OrderSummary = React.createClass({
     return (
       <div className='container'>
         <div className='col-md-2'>
-          <p>{this.props.data} : {this.props.value}</p>
+          <p>{this.props.data} : Qty {this.props.count} : Subtotal {this.props.subtotal}</p>
         </div>
       </div>
     )

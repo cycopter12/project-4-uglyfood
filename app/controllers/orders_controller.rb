@@ -16,7 +16,7 @@ skip_before_action :verify_authenticity_token, :only => [:create, :destroy]
 
     respond_to do |format|
         format.html { render :index }
-        format.json { render json: @orders }
+        format.json { render json: responseObj }
     end
   end
 
@@ -182,12 +182,15 @@ skip_before_action :verify_authenticity_token, :only => [:create, :destroy]
   end
 
   def create_order_summary
-    @order_summary = Hash.new(0)
+    @order_summary = Hash.new {|h,k| h[k] = Hash.new(0)  }
 
     @orders.each do |order|
       key = order["outlet_produce"]["produce"]["name"]
-      @order_summary[key] += order["quantity_bought"]
+      @order_summary[key]["quantity_bought"] += order["quantity_bought"]
+      @order_summary[key]["subtotal"] += order["cost"]
     end
+
+    p @order_summary
   end
 
   def set_response_hash

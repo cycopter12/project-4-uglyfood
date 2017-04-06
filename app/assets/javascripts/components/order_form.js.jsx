@@ -104,7 +104,7 @@ var OrderForm = React.createClass({
 
           <div className='field col-md-3'>
             <label htmlFor='order_QTY'>Quantity</label>
-            <input type='number' ref='quantity_bought' name='order[quantity_bought]' id='order_quantity_bought' value={this.state.quantity_bought} onChange={this.handleChange} />
+            <input type='number' ref='quantity_bought' name='order[quantity_bought]' id='order_quantity_bought' min="0" value={this.state.quantity_bought} onChange={this.handleChange} />
           </div>
 
           <div className='actions'>
