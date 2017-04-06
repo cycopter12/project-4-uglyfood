@@ -14,3 +14,24 @@
 .container{
   margin-top:60px;
 }
+.container.forsale {
+	margin-top: 0px;
+	margin-bottom: 90px;
+}
+
+.container.content {
+	text-align: center;
+}
+
+.container.service {
+	margin: 0px 135px;
+}
+
+.page-scroll.btn.btn-default.btn-xl.sr-button {
+	color: black;
+}
+
+.forSaleBtn {
+	text-align: center;
+	margin-top: 200px;
+}
