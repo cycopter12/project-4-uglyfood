@@ -8,12 +8,6 @@ var OrderBody = React.createClass({
     }
   },
 
-  // handleNewOrder: function(created_order) {
-  //   this.setState({
-  //     orders: this.state.orders.push(created_order)
-  //   })
-  //
-
   showOrderQuantity: function (orderArr, outletProduceId) {
     console.log('calculating order qty')
     console.log(orderArr)
@@ -29,10 +23,6 @@ var OrderBody = React.createClass({
     return 0
   },
 
-  // componentWillMount: function () {
-  //   console.log('Main div:', this.props.orders)
-  // },
-
   getNewPropsFromChild: function (responseObj) {
     console.log('parent talking here', responseObj)
     return this.setState({
@@ -47,12 +37,8 @@ var OrderBody = React.createClass({
     for (var item in this.state.order_summary) {
       total += +this.state.order_summary[item]['subtotal']
     }
-    return total
+    return total.toFixed(2)
   },
-
-  // componentDidMount: function() {
-  //   this.getOrderTotal()
-  // },
 
 // quantity_already_bought={this.showOrderQuantity(this.state.orders, outlet_produce.id)}
 
@@ -68,8 +54,8 @@ var OrderBody = React.createClass({
       <div className='container' style={{marginTop: 50}}>
         <div className="container">
           <div className="col-md-9">
-            <h2>Order form</h2>
-            {Object.keys(this.state.outlet_produces).map((branch, i) => <BranchItems key={i} data={this.state.outlet_produces[branch]} returnProps={this.getNewPropsFromChild.bind(this)} current_user={this.state.current_user} branchName={branch} showOrderQuantity={this.showOrderQuantity} orders={this.state.orders} />)}
+            <h2>Order form</h2>  
+              {Object.keys(this.state.outlet_produces).map((branch, i) => <BranchItems key={i} data={this.state.outlet_produces[branch]} returnProps={this.getNewPropsFromChild.bind(this)} current_user={this.state.current_user} branchName={branch} showOrderQuantity={this.showOrderQuantity} orders={this.state.orders} />)}
           </div>
           <div className='col-md-3'>
             <h2>Your orders</h2>
