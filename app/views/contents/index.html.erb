@@ -2,11 +2,12 @@
 
 <div class="container contentIndex">
   <div class="row">
-    <a href="/contents/new"><button class="btn-1" style="float: right;">Create New Content</button></a>
     <div class="col-sm-6">
       <h1><strong>Contents<strong></h1>
+      </div>
+    <a href="/contents/new"><button class="btn-1" style="float: right;">Create New Content</button></a>
     </div>
-    <div class="row" >
+    <div class="row1" >
       <% @contents.each do |content| %>
       <%=link_to content do %>
       <div class="col-lg-4 col-sm-6">
@@ -19,7 +20,5 @@
       </div>
       <% end %>
       <% end %>
-
-    </div>
 </div>
 </div>
