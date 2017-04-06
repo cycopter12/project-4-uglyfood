@@ -9,7 +9,7 @@ Rails.application.routes.draw do
   get 'update_orders' => 'orders#update', :as => 'update'
   resources :outlet_produces
 
-  devise_for :users, controllers: { registrations: "users/registrations"}
+  devise_for :users, controllers: { registrations: "users/registrations", sessions: "users/sessions"}
 
   root 'welcome#index'
   get '*path', to: 'welcome#index'

@@ -28,44 +28,23 @@ var Order = React.createClass({
 
   render: function () {
     return (
-      <div className='container'>
-        <h3> Order Number: {this.props.idx.toString()} </h3>
-        <div className='col-md-2'>
-          <p>
-            Order id:
-            <br />
+      <div className='OProw' style={{marginTop:2+"em"}}>
+        <div className='col-md-2 OPcolumn'>
             {this.props.data.id}
-          </p>
         </div>
-        <div className='col-md-2'>
-          <p>
-            Supermarket branch:
-            <br />
+        <div className='col-md-2 OPcolumn'>
             {this.props.data.outlet_produce.outlet.supermarket.name} {this.props.data.outlet_produce.outlet.branch}
-          </p>
         </div>
-        <div className='col-md-2'>
-          <p>
-            Produce name:
-            <br />
+        <div className='col-md-2 OPcolumn'>
             {this.props.data.outlet_produce.produce.name}
-          </p>
         </div>
-        <div className='col-md-2'>
-          <p>
-            Sub-total:
-            <br />
+        <div className='col-md-2 OPcolumn'>
             {this.props.data.cost}
-          </p>
         </div>
-        <div className='col-md-2'>
-          <p>
-            Quantity bought:
-            <br />
+        <div className='col-md-2 OPcolumn'>
             {this.props.data.quantity_bought}
-          </p>
         </div>
-        <button onClick={this.deleteOrder}>Delete</button>
+        <button className='btn-1' onClick={this.deleteOrder}>Delete</button>
         <br />
       </div>
     )

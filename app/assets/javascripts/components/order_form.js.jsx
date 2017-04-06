@@ -62,42 +62,40 @@ var OrderForm = React.createClass({
   // },
 
   // code below to show quantity already bought, removed because buggy
-  // <div className='col-md-3'>
-  //   <p>Quantity already bought: {this.state.quantity_already_bought}</p>
+  // <div className='col-md-3 OPcolumn'>
+  //   Quantity already bought: {this.state.quantity_already_bought}</p>
   // </div>
 
-  // <div className='col-md-3'>
+  // <div className='col-md-3 OPcolumn'>
   //   <p>Supermarket outlet: {this.props.data.outlet.supermarket.name} {this.props.data.outlet.branch}</p>
   // </div>
 
   render: function () {
     return (
-      <div className='col-md-9'>
+      <div className='col-md-9 OProw' style={{borderBottom:0}}>
         <form className='new_order' id='new_order' action='/orders' acceptCharset='UTF-8' method='post'>
           <input name='utf8' type='hidden' value='✓' />
 
-          <div className='col-md-3'>
-            <p>Name: {this.props.data.produce.name}</p>
+          <div className='col-md-3 OPcolumn' style={{marginBottom:0}}>
+            {this.props.data.produce.name}
           </div>
 
-          <div className='col-md-3'>
-            <p>Remaining: {this.state.quantity}</p>
+          <div className='col-md-3 OPcolumn' style={{marginBottom:0}}>
+            {this.state.quantity}
           </div>
-          <div className='col-md-3'>
-            <p>Quantity already bought: {this.state.quantity_already_bought} </p>
-          </div>
-
-          <div className='field col-md-3'>
-            <label htmlFor='order_QTY'>Quantity</label>
-            <input type='number' ref='quantity_bought' name='order[quantity_bought]' id='order_quantity_bought' min="0" value={this.state.quantity_bought} onChange={this.handleChange} />
+          <div className='col-md-3 OPcolumn' style={{marginBottom:0}}>
+             {this.state.quantity_already_bought}
           </div>
 
-          <div className='actions'>
+          <div className='field col-md-3 OPcolumn' style={{marginBottom:0}}>
+            <label htmlFor='order_QTY'></label>
+            <input type='number' ref='quantity_bought' name='order[quantity_bought]' id='qtyInput' min="0" value={this.state.quantity_bought} onChange={this.handleChange} />
+          </div>
+
+          <div className='actions' style={{marginBottom:0}}>
             <input type='submit' name='commit' value='Submit' className='btn btn-default' data-disable-with='Submit' onClick={this.submitForm} style={{visibility:'hidden'}} />
           </div>
         </form>
-        <br />
-        <hr />
       </div>
     )
   }

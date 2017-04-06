@@ -51,17 +51,16 @@ var OrderBody = React.createClass({
 
   render: function () {
     return (
-      <div className='container' style={{marginTop: 50}}>
+      <div className='container' style={{marginTop:5+"em"}}>
         <div className="container">
           <div className="col-md-9">
-            <h2>Order form</h2>  
               {Object.keys(this.state.outlet_produces).map((branch, i) => <BranchItems key={i} data={this.state.outlet_produces[branch]} returnProps={this.getNewPropsFromChild.bind(this)} current_user={this.state.current_user} branchName={branch} showOrderQuantity={this.showOrderQuantity} orders={this.state.orders} />)}
           </div>
           <div className='col-md-3'>
-            <h2>Your orders</h2>
-            <div>
+            <div className="OPheading" style={{color:"#222222",paddingLeft:1.5+"em",borderBottom:0}}>Your orders</div>
+            <div style={{paddingLeft:1.5+"em"}}>
               {Object.keys(this.state.order_summary).map((name, i) => <OrderSummary data={name} count={this.state.order_summary[name]['quantity_bought']} subtotal={this.state.order_summary[name]['subtotal']} key={i} />)}
-              <p>Total: {this.getOrderTotal()} </p>
+              <div style={{color:"#33995C",fontSize:1.8+"em",fontWeight:"bold",paddingLeft:1+"em"}}>Total: $ {this.getOrderTotal()} </div>
             </div>
           </div>
         </div>
