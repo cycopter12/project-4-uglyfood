@@ -11,6 +11,14 @@ body {
 body {
   font-family: 'Merriweather', 'Helvetica Neue', Arial, sans-serif;
 }
+
+.orderFormHeading {
+  font-color: #33995C;
+  font-size: 1.8em;
+  font-weight: bold;
+  padding-left: 0
+}
+
 hr {
   border-color: #F05F40;
   border-width: 3px;

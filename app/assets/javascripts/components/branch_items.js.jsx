@@ -2,14 +2,15 @@ var BranchItems = React.createClass({
 
   render: function () {
     return (
-      <div className='container'>
-        <h3>{this.props.branchName}</h3>
-        <div className="col-md-9">
-          <div className="col-md-3">Produce</div>
-          <div className="col-md-3">Remaining</div>
-          <div className="col-md-3">Qty bought</div>
-          <div className="col-md-3">Order qty</div>
+      <div className='container' style={{marginBottom: 3.5 + 'em'}}>
+        <div className='OPheading' style={{color: '#222222', borderBottom: 0}}>{this.props.branchName}</div>
+        <div className='col-md-9' style={{color: '#33995C', fontSize: 1.4 + 'em', fontWeight: 'bold', paddingLeft: '0'}}>
+          <div className='col-md-3'><h4>Produce</h4><hr style={{maxWidth: 100 + '%'}} /></div>
+          <div className='col-md-3'><h4>Remaining</h4><hr style={{maxWidth: 100 + '%'}} /></div>
+          <div className='col-md-3'><h4>Bought</h4><hr style={{maxWidth: 100 + '%'}} /></div>
+          <div className='col-md-3'><h4>Buy</h4><hr style={{maxWidth: 100 + '%'}} /></div>
         </div>
+
         {this.props.data.map((item, i) => <OrderForm key={i} data={item} current_user={this.props.current_user} returnProps={this.props.returnProps} showOrderQuantity={this.props.showOrderQuantity} orders={this.props.orders} />)}
       </div>
     )
