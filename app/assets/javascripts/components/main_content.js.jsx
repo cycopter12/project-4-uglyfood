@@ -38,7 +38,7 @@ var MainContent = React.createClass({
   render: function () {
     return (
       <div>
-        <ContentIndex contents={this.state.contents} handleDelete={this.handleDelete} onUpdate={this.handleEdit} />
+        <ContentIndex contents={this.state.contents} />
         <ContentShow contents={this.state.contents} handleDelete={this.handleDelete} onUpdate={this.handleEdit} />
       </div>
     )

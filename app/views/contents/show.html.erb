@@ -1,4 +1,1 @@
-<%= react_component 'ContentShow', {content: @content, product_type: @product_type, description: @description, body: @body, image: @content.image_url, update: true, button_text: 'Update Content'} %>
-
-<%= link_to 'Edit', edit_content_path(@content) %> |
-<%= link_to 'Back', contents_path %>
+<%= react_component 'ContentShow', {content: @content, product_type: @product_type, description: @description, body: @body, image: @content.image_url, update: false, button_text: 'Update Content'} %>

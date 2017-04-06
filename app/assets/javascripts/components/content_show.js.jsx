@@ -38,12 +38,14 @@ var ContentShow = React.createClass({
       var image = this.refs.image.value
       // var accepted = this.refs.accepted.value
       var content = {id: id, projectType: projectType, body: body, description: description, image: image}
+      var form = $('#new_content')[0]
+      var data = new FormData(form)
       $.ajax({
         url: `/contents/${content.id}`,
         type: 'PUT',
         data: {content: content},
         success: (content) => {
-          this.updateContents(content.id)
+          this.updateContents(this.props.content.id)
         }
       })
     }
@@ -59,16 +61,18 @@ var ContentShow = React.createClass({
     var image = this.state.editable ? <input type='file' ref='image' defaultValue={this.props.content.image.url} /> : <img src={this.props.content.image.url} />
     var accepted = this.state.editable ? <input type='checkbox' ref='accepted' defaultValue={this.props.content.accepted} /> : <p />
     return (
-      <div>
-        <p>{projectType}</p>
-        <p>{body}</p>
-        <p>{description}</p>
-        <p>{image}</p>
+      <div className='container'>
+        <div className='content'>
+          <h2>Project Type:</h2> {projectType}
+          <h2>Title:</h2> {description}
+          <h2>Description: {body}</h2>
+          <h2>{image}</h2>
 
-        <button onClick={this.handleDelete}> Delete </button>
-        <button onClick={this.handleEdit}>{this.state.editable ? 'Submit' : 'Edit'}</button>
+          <button className='btn-1' onClick={this.handleDelete}> Delete </button>
+          <button className='btn-1' onClick={this.handleEdit}>{this.state.editable ? 'Submit' : 'Edit'}</button>
+          <a href="/contents"><button className="btn-1">Back</button></a>
+        </div>
       </div>
-
     )
   }
 })

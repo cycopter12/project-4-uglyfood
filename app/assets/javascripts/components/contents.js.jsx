@@ -11,7 +11,6 @@ class Contents extends React.Component {
     var project_type = this.refs.project_type.value
     var body = this.refs.body.value
     var image = this.refs.image.value
-    var accepted = this.refs.accepted.value
     var description = this.refs.description.value
     var form = $('#new_content')[0];
     var data = new FormData(form);
@@ -59,13 +58,9 @@ class Contents extends React.Component {
             <input type='file' ref='image' name='content[image]' id='content_image' />
           </div>
 
-          <div className='field'>
-            <label htmlFor='content_accepted'>Accepted</label>
-            <input name='content[accepted]' ref='accepted' type='hidden' value='0' /><input type='checkbox' value='1' name='content[accepted]' id='content_accepted' />
-          </div>
-
           <div className='actions'>
-            <input type='submit' name='commit' value={this.props.button_text} data-disable-with='Create Content' />
+            <input className="btn-1" type='submit' name='commit' value={this.props.button_text} data-disable-with='Create Content' />
+            <a href="/contents"><button className="btn-1">Back</button></a>
           </div>
         </form>
       </div>
