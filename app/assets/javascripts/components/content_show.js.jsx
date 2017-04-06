@@ -14,16 +14,6 @@ var ContentShow = React.createClass({
     })
     this.setState({contents: newContents})
   },
-  handleEdit (content) {
-    $.ajax({
-      url: `/contents/${this.props.content.id}`,
-      type: 'PUT',
-      data: {content: content},
-      success: (content) => {
-        this.updateContents(this.props.content.id)
-      }
-    })
-  },
   updateContents (content) {
     var contents = this.state.contents.filter((i) => { return i.id != content.id })
     contents.push(content)
@@ -46,9 +36,16 @@ var ContentShow = React.createClass({
       var body = this.refs.body.value
       var description = this.refs.description.value
       var image = this.refs.image.value
-      var accepted = this.refs.accepted.value
-      var content = {id: id, projectType: projectType, body: body, description: description, image: image, accepted: accepted}
-      this.props.handleEdit(content)
+      // var accepted = this.refs.accepted.value
+      var content = {id: id, projectType: projectType, body: body, description: description, image: image}
+      $.ajax({
+        url: `/contents/${content.id}`,
+        type: 'PUT',
+        data: {content: content},
+        success: (content) => {
+          this.updateContents(content.id)
+        }
+      })
     }
     this.setState({editable: !this.state.editable})
   },
