@@ -2,22 +2,7 @@ var MainContent = React.createClass({
   getInitialState () {
     return {contents: []}
   },
-  handleEdit (content) {
-    $.ajax({
-      url: `/contents/${content.id}`,
-      type: 'PUT',
-      data: {content: content},
-      success: () => {
-        this.updateContents(content)
-      }
-    })
-  },
-  updateContents (content) {
-    var contents = this.state.contents.filter((i) => { return i.id != content.id })
-    contents.push(content)
 
-    this.setState({contents: contents })
-  },
   // handleShow(id){
   //   $.ajax({
   //     url: `/contents/${content.id}`,
@@ -54,6 +39,7 @@ var MainContent = React.createClass({
     return (
       <div>
         <ContentIndex contents={this.state.contents} handleDelete={this.handleDelete} onUpdate={this.handleEdit} />
+        <ContentShow contents={this.state.contents} handleDelete={this.handleDelete} onUpdate={this.handleEdit} />
       </div>
     )
   }
