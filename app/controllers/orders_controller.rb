@@ -1,5 +1,5 @@
 class OrdersController < ApplicationController
-
+  before_action :authenticate_user!, :check_organization_acc
   before_action :set_order, only: [:destroy, :show]
   skip_before_action :verify_authenticity_token, :only => [:create, :destroy]
 
@@ -204,6 +204,13 @@ class OrdersController < ApplicationController
       sorted_items = items.sort_by { |k| k['produce']['name'] }
       @produce_list_by_outlet[branch] = sorted_items
     end
+  end
+
+  def check_organization_acc
+    p '****************************************'
+    p !!current_user.organization_name
+    p '****************************************'
+    redirect_to(root_path) unless !!current_user.organization_name
   end
 
   # def set_response_hash

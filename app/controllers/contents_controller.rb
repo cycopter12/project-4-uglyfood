@@ -1,4 +1,5 @@
 class ContentsController < ApplicationController
+  before_action :authenticate_user!, :is_admin?, only: [:edit, :update, :destroy]
   before_action :set_content, only: [:show, :edit, :update, :destroy]
   skip_before_action :verify_authenticity_token, :only => [:create, :update, :destroy]
 
@@ -79,5 +80,12 @@ class ContentsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def content_params
       params.require(:content).permit(:project_type, :body, :image, :accepted, :description)
+    end
+
+    def is_admin?
+      p '****************************************'
+      p !!current_user.is_admin
+      p '****************************************'
+      redirect_to(root_path) unless !!current_user.is_admin
     end
 end

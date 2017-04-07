@@ -24,11 +24,21 @@ var ContentShow = React.createClass({
   //   this.props.handleDelete(id)
   // },
   getInitialState () {
-    return {contents: []}
+    return {
+      contents: [],
+      is_admin: false,
+      editable: false
+    }
   },
-  getInitialState () {
-    return {editable: false}
+
+  componentWillMount () {
+    if (this.props.current_user) {
+      this.setState({
+        is_admin: this.props.current_user.is_admin
+      })
+    }
   },
+
   handleEdit () {
     if (this.state.editable) {
       var projectType = this.refs.project_type.value
@@ -53,24 +63,31 @@ var ContentShow = React.createClass({
   },
   render () {
     var projectType = this.state.editable ? <select type='text' ref='project_type' defaultValue={this.props.content.project_type}>
-      <option value='cooking'>cooking</option>
-      <option value='life hacks'>life hacks</option>
+      <option selected='selected' value='Recipes'>Recipes</option>
+      <option selected='selected' value='life hacks'>life hacks</option>
     </select> : <h3>{this.props.content.project_type}</h3>
+
+
+
+
+
     var body = this.state.editable ? <textarea type='text' ref='body' defaultValue={this.props.content.body} /> : <p>{this.props.content.body}</p>
     var description = this.state.editable ? <input type='text' ref='description' defaultValue={this.props.content.description} /> : <p>{this.props.content.description}</p>
     var image = this.state.editable ? <input type='file' ref='image' defaultValue={this.props.content.image.url} /> : <img src={this.props.content.image.url} />
-    var accepted = this.state.editable ? <input type='checkbox' ref='accepted' defaultValue={this.props.content.accepted} /> : <p />
     return (
       <div className='container'>
         <div className='content'>
-          <h2>Project Type:</h2> {projectType}
+          {projectType}
           <h2>Title:</h2> {description}
           <h2>Description: {body}</h2>
           <h2>{image}</h2>
 
-          <button className='btn-1' onClick={this.handleDelete}> Delete </button>
-          <button className='btn-1' onClick={this.handleEdit}>{this.state.editable ? 'Submit' : 'Edit'}</button>
-          <a href="/contents"><button className="btn-1">Back</button></a>
+
+          <button style={{visibility: this.state.is_admin ? 'visible':'hidden'}}className='btn-1' onClick={this.handleDelete}> Delete </button>
+          <button style={{visibility: this.state.is_admin ? 'visible':'hidden'}}className='btn-1' onClick={this.handleEdit}>{this.state.editable ? 'Submit' : 'Edit'}</button>
+
+
+
         </div>
       </div>
     )
