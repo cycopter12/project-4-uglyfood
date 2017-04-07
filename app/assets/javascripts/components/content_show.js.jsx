@@ -56,11 +56,6 @@ var ContentShow = React.createClass({
       <option selected='selected' value='Recipes'>Recipes</option>
       <option selected='selected' value='life hacks'>life hacks</option>
     </select> : <h3>{this.props.content.project_type}</h3>
-
-
-
-
-
     var body = this.state.editable ? <textarea type='text' ref='body' defaultValue={this.props.content.body} /> : <p>{this.props.content.body}</p>
     var description = this.state.editable ? <input type='text' ref='description' defaultValue={this.props.content.description} /> : <p>{this.props.content.description}</p>
     var image = this.state.editable ? <input type='file' ref='image' defaultValue={this.props.content.image.url} /> : <img src={this.props.content.image.url} />
