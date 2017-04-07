@@ -78,8 +78,8 @@ var ContentShow = React.createClass({
           <h2>{image}</h2>
 
 
+          <button style={{visibility: this.state.is_admin ? 'visible':'hidden', margin:1 + '%'}}className='btn-1' onClick={this.handleEdit}>{this.state.editable ? 'Submit' : 'Edit'} </button>
           <button style={{visibility: this.state.is_admin ? 'visible':'hidden'}}className='btn-1' onClick={this.handleDelete}> Delete </button>
-          <button style={{visibility: this.state.is_admin ? 'visible':'hidden'}}className='btn-1' onClick={this.handleEdit}>{this.state.editable ? 'Submit' : 'Edit'}</button>
 
 
 
