@@ -13,6 +13,14 @@ var Orders = React.createClass({
     })
   },
 
+  calculateTotal: function() {
+    var total = 0
+    this.state.orders.forEach(function(order) {
+      total += parseFloat(order.cost)
+    })
+    return total.toFixed(2)
+  },
+
   render: function () {
     // var arr = []
     //
@@ -26,7 +34,7 @@ var Orders = React.createClass({
       <div className='container' style={{marginTop: 5 + 'em'}}>
         <div style={{visibility: !(this.state.orders.length === 0) ? 'visible' : 'hidden', marginTop:3+"em" }}>
         <div className='OProw' style={{color: 'black', fontSize: 1.4 + 'em', fontWeight: 'bold', paddingLeft: '0'}}>
-          <div class='col-md-12'>
+          <div className='col-md-12'>
             <div className='col-md-2'><h4>ID</h4><hr style={{maxWidth: 100 + '%', borderColor: '#555555'}} /></div>
             <div className='col-md-2'><h4>Branch</h4><hr style={{maxWidth: 100 + '%', borderColor: '#555555'}} /></div>
             <div className='col-md-2'><h4>Produce</h4><hr style={{maxWidth: 100 + '%', borderColor: '#555555'}} /></div>
@@ -35,6 +43,11 @@ var Orders = React.createClass({
           </div>
         </div>
         {this.state.orders.map((order, i) => <Order key={i} data={order} idx={i + 1} returnProps={this.getUpdateFromDelete} />)}
+        <div className='container'>
+          <div className='col-md-9 OPcolumn' style={{textAlign:'right',color:"#33995C",fontSize:1.8+"em",fontWeight:"bold",paddingLeft:1+"em"}}>
+            Total: ${this.calculateTotal()}
+          </div>
+        </div>
         <div className='container'>
         <p style={{visibility: this.state.orders.length === 0 ? 'visible' : 'hidden' }}>
         You have no orders!
