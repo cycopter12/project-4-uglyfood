@@ -4,7 +4,7 @@ Supermarkets in Singapore generate an average of 2,500 tonnes of food waste on a
 
 ## Live Version
 
-[Ugly Foods](https://uglyfood.herokuapp.com/)
+[Ugly Foods](https://uglyfoods.herokuapp.com/)
 
 
 ### How to Use
